@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 04, 2022 at 05:44 PM
+-- Generation Time: Sep 11, 2022 at 03:38 PM
 -- Server version: 8.0.21
 -- PHP Version: 7.3.24-(to be removed in future macOS)
 
@@ -126,6 +126,13 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id_user`, `name`, `username`, `password`, `is_admin`) VALUES
+(1, 'Hanif Murtadha Tsaniputra', 'haniputraa', '12345', 1);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -215,7 +222,7 @@ ALTER TABLE `units`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

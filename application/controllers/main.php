@@ -18,12 +18,23 @@ class Main extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/userguide3/general/urls.html
 	 */
+
+	public function __construct(){
+		parent::__construct();		
+
+		if(!$this->session->userdata('logged_in')){
+			redirect ('auth/index');
+		}
+	}
+
 	public function index()
 	{
-		$this->load->view('template/header');
-		$this->load->view('template/sidebar');
-		$this->load->view('template/main');
-		$this->load->view('main');
-		$this->load->view('template/footer');
+		$data = [
+			'content' => 'main',
+			'result'  => [
+				'title' => 'tes'
+			],
+		];
+		$this->load->view('template/main',$data);
 	}
 }
