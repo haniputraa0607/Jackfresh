@@ -15,7 +15,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `jackfresh_db`
@@ -36,7 +36,7 @@ CREATE TABLE `clients` (
   `client_phone` varchar(40) NOT NULL,
   `cleint_email` varchar(255) DEFAULT NULL,
   `notes` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -50,9 +50,9 @@ CREATE TABLE `invoices` (
   `id_client` int DEFAULT NULL,
   `invoice_code` varchar(40) NOT NULL,
   `invoice_date` datetime NOT NULL,
-  `status` enum('Pending','Process','Finished') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `notes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `status` enum('Pending','Process','Finished') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `notes` text CHARACTER SET utf8 COLLATE utf8_general_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -66,10 +66,10 @@ CREATE TABLE `products` (
   `product_code` varchar(45) NOT NULL,
   `product_name` varchar(100) NOT NULL,
   `is_active` tinyint NOT NULL DEFAULT '0',
-  `product_photo` varchar(450) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `product_photo` varchar(450) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `product_visibility` enum('Visible','Hidden') NOT NULL,
-  `notes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `notes` text CHARACTER SET utf8 COLLATE utf8_general_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -83,7 +83,7 @@ CREATE TABLE `product_units` (
   `id_unit` int NOT NULL,
   `qty` int NOT NULL,
   `price` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -98,7 +98,7 @@ CREATE TABLE `transactions` (
   `transaction_date` datetime NOT NULL,
   `status` enum('Pending','Process','Finished') NOT NULL,
   `notes` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -109,7 +109,7 @@ CREATE TABLE `transactions` (
 CREATE TABLE `units` (
   `id_unit` int NOT NULL,
   `unit_name` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -119,11 +119,11 @@ CREATE TABLE `units` (
 
 CREATE TABLE `users` (
   `id_user` int NOT NULL,
-  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `username` varchar(20) NOT NULL,
   `password` varchar(10) NOT NULL,
   `is_admin` tinyint NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `users`
