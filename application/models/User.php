@@ -4,6 +4,7 @@ class User extends CI_Model
 {
 
 	public function checklogin($username, $password){
+
 		$user = $this->db->get_where("users", array("username"=>$username, "password"=>($password)))->row_array();
 
 		if (count($user)>0){
@@ -18,10 +19,12 @@ class User extends CI_Model
 		else{
 			return false;
 		}
-		}
+	}
 
 	public function logout	(){
 		$this->session->unset_userdata(array("username","id", 'logged_in'));
 	}
-	}
+	
+}
+
 ?>
