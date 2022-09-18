@@ -32,7 +32,9 @@ class Main extends CI_Controller {
 		$data = [
 			'content' => 'main',
 			'result'  => [
-				'title' => 'tes'
+				'title' => 'Dashboard',
+                'menu_active' => 'dashboard',
+				'submenu_active' => null,
 			],
 		];
 		$this->load->view('template/main',$data);
