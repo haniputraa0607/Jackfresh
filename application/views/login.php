@@ -29,7 +29,7 @@
         <!-- Outer Row -->
         <div class="row justify-content-center mt-5">
 
-            <div class="col-md-6 mt-5">
+            <div class="col-md-5 mt-5">
 
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
