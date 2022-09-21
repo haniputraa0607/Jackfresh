@@ -17,7 +17,6 @@
 
             <hr class="sidebar-divider my-0">
 
-
             <li class="nav-item <?php if($menu_active=='dashboard'){ echo 'active'; } ?>">
                 <a class="nav-link" href="<?php echo base_url() ?>">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
