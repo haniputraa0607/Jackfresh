@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 18, 2022 at 05:22 PM
+-- Generation Time: Sep 25, 2022 at 02:44 PM
 -- Server version: 8.0.21
 -- PHP Version: 7.3.24-(to be removed in future macOS)
 
@@ -38,6 +38,14 @@ CREATE TABLE `clients` (
   `notes` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `clients`
+--
+
+INSERT INTO `clients` (`id_client`, `client_code`, `client_name`, `client_type`, `client_address`, `client_phone`, `cleint_email`, `notes`) VALUES
+(1, 'HTL-01', 'Hotel Buana', 'Hotel', 'Solo', '0819231123', 'buana@gmail.com', 'tes'),
+(2, 'RST-01', 'Resto Mantap', 'Restaurant', 'Sukoharjo', '089231232', 'mantap@gmail.com', 'tes2');
+
 -- --------------------------------------------------------
 
 --
@@ -54,6 +62,14 @@ CREATE TABLE `products` (
   `notes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id_product`, `product_code`, `product_name`, `is_active`, `product_photo`, `product_visibility`, `notes`) VALUES
+(1, 'SMP-1', 'Shampo', 1, NULL, 'Visible', 'tes'),
+(2, 'SBN-1', 'Sabun', 1, NULL, 'Visible', 'tes');
+
 -- --------------------------------------------------------
 
 --
@@ -68,6 +84,15 @@ CREATE TABLE `product_units` (
   `price` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `product_units`
+--
+
+INSERT INTO `product_units` (`id_product_unit`, `id_product`, `id_unit`, `qty`, `price`) VALUES
+(1, 1, 2, 5, 30000),
+(2, 1, 1, 40, 5000),
+(3, 2, 1, 40, 6000);
+
 -- --------------------------------------------------------
 
 --
@@ -75,13 +100,21 @@ CREATE TABLE `product_units` (
 --
 
 CREATE TABLE `purchase` (
-  `id_invoices` int NOT NULL,
+  `id_purchase` int NOT NULL,
   `id_client` int DEFAULT NULL,
-  `invoice_code` varchar(40) NOT NULL,
-  `invoice_date` datetime NOT NULL,
+  `purchase_code` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `purchase_date` datetime NOT NULL,
   `status` enum('Pending','Process','Finished') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `notes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `purchase`
+--
+
+INSERT INTO `purchase` (`id_purchase`, `id_client`, `purchase_code`, `purchase_date`, `status`, `notes`) VALUES
+(1, 2, 'PUR-1', '2022-09-25 00:00:00', 'Pending', 'tes'),
+(2, NULL, 'PUR-2', '2022-09-25 00:00:00', 'Pending', 'tes');
 
 -- --------------------------------------------------------
 
@@ -97,6 +130,15 @@ CREATE TABLE `purchase_product_units` (
   `status` tinyint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `purchase_product_units`
+--
+
+INSERT INTO `purchase_product_units` (`id_purchase_product_unit`, `id_purchase`, `id_product_unit`, `qty`, `status`) VALUES
+(1, 1, 2, 2, 0),
+(2, 1, 1, 3, 0),
+(3, 2, 2, 2, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -105,7 +147,7 @@ CREATE TABLE `purchase_product_units` (
 
 CREATE TABLE `transactions` (
   `id_transaction` int NOT NULL,
-  `client` int DEFAULT NULL,
+  `id_client` int DEFAULT NULL,
   `id_invoice` int DEFAULT NULL,
   `transaction_code` varchar(40) NOT NULL,
   `transaction_date` datetime NOT NULL,
@@ -113,6 +155,14 @@ CREATE TABLE `transactions` (
   `status` enum('Pending','Process','Finished') NOT NULL,
   `notes` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `transactions`
+--
+
+INSERT INTO `transactions` (`id_transaction`, `id_client`, `id_invoice`, `transaction_code`, `transaction_date`, `grand_total`, `status`, `notes`) VALUES
+(1, 2, NULL, 'TRAN-1', '2022-09-25 00:00:00', 50000, 'Pending', 'tes'),
+(2, 2, 1, 'TRAN-2', '2022-09-25 00:00:00', 50000, 'Pending', 'tes');
 
 -- --------------------------------------------------------
 
@@ -129,6 +179,15 @@ CREATE TABLE `transaction_product_units` (
   `status` tinyint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `transaction_product_units`
+--
+
+INSERT INTO `transaction_product_units` (`id_transaction_product_unit`, `id_transaction`, `id_product_unit`, `qty`, `price`, `status`) VALUES
+(1, 2, 2, 2, 40000, 0),
+(2, 2, 1, 3, 40000, 0),
+(3, 1, 1, 2, 20000, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -137,8 +196,17 @@ CREATE TABLE `transaction_product_units` (
 
 CREATE TABLE `units` (
   `id_unit` int NOT NULL,
-  `unit_name` varchar(45) NOT NULL
+  `unit_name` varchar(45) NOT NULL,
+  `unit_visibility` enum('Visible','Hidden') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `units`
+--
+
+INSERT INTO `units` (`id_unit`, `unit_name`, `unit_visibility`) VALUES
+(1, 'PCS', 'Visible'),
+(2, 'Lusin', 'Hidden');
 
 -- --------------------------------------------------------
 
@@ -181,19 +249,23 @@ ALTER TABLE `products`
 -- Indexes for table `product_units`
 --
 ALTER TABLE `product_units`
-  ADD PRIMARY KEY (`id_product_unit`);
+  ADD PRIMARY KEY (`id_product_unit`),
+  ADD KEY `fk_product` (`id_product`),
+  ADD KEY `fk_unit` (`id_unit`);
 
 --
 -- Indexes for table `purchase`
 --
 ALTER TABLE `purchase`
-  ADD PRIMARY KEY (`id_invoices`);
+  ADD PRIMARY KEY (`id_purchase`);
 
 --
 -- Indexes for table `purchase_product_units`
 --
 ALTER TABLE `purchase_product_units`
-  ADD PRIMARY KEY (`id_purchase_product_unit`);
+  ADD PRIMARY KEY (`id_purchase_product_unit`),
+  ADD KEY `fk_purchase` (`id_purchase`),
+  ADD KEY `fk_product_unit` (`id_product_unit`);
 
 --
 -- Indexes for table `transactions`
@@ -205,7 +277,9 @@ ALTER TABLE `transactions`
 -- Indexes for table `transaction_product_units`
 --
 ALTER TABLE `transaction_product_units`
-  ADD PRIMARY KEY (`id_transaction_product_unit`);
+  ADD PRIMARY KEY (`id_transaction_product_unit`),
+  ADD KEY `fk_transaction` (`id_transaction`),
+  ADD KEY `fk_transaction_product` (`id_product_unit`);
 
 --
 -- Indexes for table `units`
@@ -227,55 +301,80 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id_client` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_client` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id_product` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_product` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `product_units`
 --
 ALTER TABLE `product_units`
-  MODIFY `id_product_unit` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_product_unit` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `purchase`
 --
 ALTER TABLE `purchase`
-  MODIFY `id_invoices` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_purchase` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `purchase_product_units`
 --
 ALTER TABLE `purchase_product_units`
-  MODIFY `id_purchase_product_unit` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_purchase_product_unit` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id_transaction` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_transaction` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `transaction_product_units`
 --
 ALTER TABLE `transaction_product_units`
-  MODIFY `id_transaction_product_unit` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_transaction_product_unit` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `units`
 --
 ALTER TABLE `units`
-  MODIFY `id_unit` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_unit` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `product_units`
+--
+ALTER TABLE `product_units`
+  ADD CONSTRAINT `fk_product` FOREIGN KEY (`id_product`) REFERENCES `products` (`id_product`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_unit` FOREIGN KEY (`id_unit`) REFERENCES `units` (`id_unit`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Constraints for table `purchase_product_units`
+--
+ALTER TABLE `purchase_product_units`
+  ADD CONSTRAINT `fk_product_unit` FOREIGN KEY (`id_product_unit`) REFERENCES `product_units` (`id_product_unit`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `fk_purchase` FOREIGN KEY (`id_purchase`) REFERENCES `purchase` (`id_purchase`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Constraints for table `transaction_product_units`
+--
+ALTER TABLE `transaction_product_units`
+  ADD CONSTRAINT `fk_transaction` FOREIGN KEY (`id_transaction`) REFERENCES `transactions` (`id_transaction`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `fk_transaction_product` FOREIGN KEY (`id_product_unit`) REFERENCES `product_units` (`id_product_unit`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
