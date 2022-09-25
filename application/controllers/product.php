@@ -5,6 +5,8 @@ class Product extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();		
+		$this->load->library('form_validation');
+		$this->load->model('M_Product');
 
 		if(!$this->session->userdata('logged_in')){
 			redirect ('auth/index');
@@ -12,12 +14,14 @@ class Product extends CI_Controller {
 	}
 
     public function index(){
+		$products = $this->M_Product->getProduct([])->result();
         $data = [
 			'content' => 'list_product',
 			'result'  => [
-				'title' => 'List Product',
-                'menu_active' => 'product',
-                'submenu_active' => 'list-product'
+				'title' 		 => 'List Product',
+                'menu_active' 	 => 'product',
+                'submenu_active' => 'list-product',
+				'products' 		 => $products
 			],
 		];
 		$this->load->view('template/main',$data);
@@ -37,12 +41,14 @@ class Product extends CI_Controller {
     }
 
     public function unit_list(){
+		$units = $this->M_Product->getUnit([])->result();
         $data = [
-			'content' => 'main',
+			'content' => 'list_unit',
 			'result'  => [
-				'title' => 'List Unit',
-                'menu_active' => 'product',
-                'submenu_active' => 'list-unit'
+				'title' 		 => 'List Unit',
+                'menu_active'    => 'product',
+                'submenu_active' => 'list-unit',
+				'units' 		 => $units
 			],
 		];
 		$this->load->view('template/main',$data);

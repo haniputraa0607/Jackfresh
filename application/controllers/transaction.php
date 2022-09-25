@@ -5,6 +5,8 @@ class Transaction extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();		
+		$this->load->library('form_validation');
+		$this->load->model('M_Transaction');
 
 		if(!$this->session->userdata('logged_in')){
 			redirect ('auth/index');
@@ -12,12 +14,14 @@ class Transaction extends CI_Controller {
 	}
 
     public function index(){
+		$transactions = $this->M_Transaction->getTransaction([])->result();
 		$data = [
-			'content' => 'main',
+			'content' => 'list_transaction',
 			'result'  => [
 				'title' => 'List Transaction',
                 'menu_active' => 'transaction',
-                'submenu_active' => 'list-transaction'
+                'submenu_active' => 'list-transaction',
+				'transactions' 	 => $transactions
 			],
 		];
 		$this->load->view('template/main',$data);
@@ -36,12 +40,14 @@ class Transaction extends CI_Controller {
     }
 
     public function purchase_list(){
+		$purchases = $this->M_Transaction->getPurchase([])->result();
 		$data = [
-			'content' => 'main',
+			'content' => 'list_purchase',
 			'result'  => [
-				'title' => 'List Purchase Request',
-                'menu_active' => 'transaction',
-                'submenu_active' => 'list-purchase'
+				'title' 		 => 'List Purchase Request',
+                'menu_active' 	 => 'transaction',
+                'submenu_active' => 'list-purchase',
+				'purchases' 	 => $purchases
 			],
 		];
 		$this->load->view('template/main',$data);
