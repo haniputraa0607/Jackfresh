@@ -7,6 +7,12 @@ class M_Client extends CI_Model{
         $this->db->where($where);
         return $this->db->get('clients');
     }
+	
+	public function tes($where)
+    {
+        $this->db->where($where);
+        return $this->db->get('clients');
+    }
 }
 
 ?>
