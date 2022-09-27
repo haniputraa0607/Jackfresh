@@ -8,21 +8,21 @@
                 <thead class="text-center">
                     <tr>
                         <th>No</th>
-                        <th>Transaction Date</th>
-                        <th>Transaction Code</th>
-                        <th>Client Name</th>
-                        <th>Product Unit</th>
-                        <th>Action</th>
+                        <th>Tanggal Transaksi</th>
+                        <th>Kode Transaksi</th>
+                        <th>Nama Klien</th>
+                        <th>Jumlah Produk</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tfoot class="text-center">
                     <tr>
-                        <th>No</th>
-                        <th>Transaction Date</th>
-                        <th>Transaction Code</th>
-                        <th>Client Name</th>
-                        <th>Product Unit</th>
-                        <th>Action</th>
+                         <th>No</th>
+                        <th>Tanggal Transaksi</th>
+                        <th>Kode Transaksi</th>
+                        <th>Nama Klien</th>
+                        <th>Jumlah Produk</th>
+                        <th>Aksi</th>
                     </tr>
                 </tfoot>
                 <tbody>
