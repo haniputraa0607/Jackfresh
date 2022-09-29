@@ -8,19 +8,19 @@
                 <thead class="text-center">
                     <tr>
                         <th>No</th>
-                        <th>Client Name</th>
-                        <th>Client Code</th>
-                        <th>Client Type</th>
-                        <th>Action</th>
+                        <th>Nama Klien</th>
+                        <th>Kode Klien</th>
+                        <th>Jenis Klien</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tfoot class="text-center">
                     <tr>
                         <th>No</th>
-                        <th>Client Name</th>
-                        <th>Client Code</th>
-                        <th>Client Type</th>
-                        <th>Action</th>
+                        <th>Nama Klien</th>
+                        <th>Kode Klien</th>
+                        <th>Jenis Klien</th>
+                        <th>Aksi</th>
                     </tr>
                 </tfoot>
                 <tbody>

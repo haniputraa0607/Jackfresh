@@ -8,19 +8,19 @@
                 <thead class="text-center">
                     <tr>
                         <th>No</th>
-                        <th>Product Name</th>
-                        <th>Product Code</th>
-                        <th>Visibility</th>
-                        <th>Action</th>
+                        <th>Nama Produk</th>
+                        <th>Kode Produk</th>
+                        <th>Visibilitas</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tfoot class="text-center">
                     <tr>
                         <th>No</th>
-                        <th>Product Name</th>
-                        <th>Product Code</th>
-                        <th>Visibility</th>
-                        <th>Action</th>
+                        <th>Nama Produk</th>
+                        <th>Kode Produk</th>
+                        <th>Visibilitas</th>
+                        <th>Aksi</th>
                     </tr>
                 </tfoot>
                 <tbody>

@@ -8,17 +8,17 @@
                 <thead class="text-center">
                     <tr>
                         <th>No</th>
-                        <th>Unit Name</th>
-                        <th>Visibility</th>
-                        <th>Action</th>
+                        <th>Nama Unit</th>
+                        <th>Visibilitas</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tfoot class="text-center">
                     <tr>
                         <th>No</th>
-                        <th>Unit Name</th>
-                        <th>Visibility</th>
-                        <th>Action</th>
+                        <th>Nama Unit</th>
+                        <th>Visibilitas</th>
+                        <th>Aksi</th>
                     </tr>
                 </tfoot>
                 <tbody>
