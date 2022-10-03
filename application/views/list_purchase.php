@@ -8,21 +8,21 @@
                 <thead class="text-center">
                     <tr>
                         <th>No</th>
-                        <th>Purchase Date</th>
-                        <th>Purchase Code</th>
-                        <th>Client Name</th>
-                        <th>Product Unit</th>
-                        <th>Action</th>
+                        <th>Tanggal Pembelian</th>
+                        <th>Kode Pembelian</th>
+                        <th>Nama Klien</th>
+                        <th>Jumlah Produk</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tfoot class="text-center">
                     <tr>
                         <th>No</th>
-                        <th>Purchase Date</th>
-                        <th>Purchase Code</th>
-                        <th>Client Name</th>
-                        <th>Product Unit</th>
-                        <th>Action</th>
+                        <th>Tanggal Pembelian</th>
+                        <th>Kode Pembelian</th>
+                        <th>Nama Klien</th>
+                        <th>Jumlah Produk</th>
+                        <th>Aksi</th>
                     </tr>
                 </tfoot>
                 <tbody>

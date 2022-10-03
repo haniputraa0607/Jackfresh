@@ -28,15 +28,15 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProduct"
                     aria-expanded="true" aria-controls="collapseProduct">
                     <i class="fas fa-fw fa-warehouse"></i>
-                    <span>Product</span>
+                    <span>Produk</span>
                 </a>
                 <div id="collapseProduct" class="collapse <?php if($menu_active=='product'){ echo 'show'; } ?>" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-dark py-2 collapse-inner rounded">
-                        <a class="collapse-item text-secondary <?php if($submenu_active=='create-product'){ echo 'active'; } ?>" href="<?php echo base_url() ?>product/create_product">New Product</a>
-                        <a class="collapse-item text-secondary <?php if($submenu_active=='list-product'){ echo 'active'; } ?>" href="<?php echo base_url() ?>product">List Product</a>
-                        <a class="collapse-item text-secondary <?php if($submenu_active=='create-unit'){ echo 'active'; } ?>" href="<?php echo base_url() ?>product/unit_create"">New Unit</a>
-                        <a class="collapse-item text-secondary <?php if($submenu_active=='list-unit'){ echo 'active'; } ?>" href="<?php echo base_url() ?>product/unit_list"">List Unit</a>
+                        <a class="collapse-item text-secondary <?php if($submenu_active=='create-product'){ echo 'active'; } ?>" href="<?php echo base_url() ?>product/create_product">Input Produk</a>
+                        <a class="collapse-item text-secondary <?php if($submenu_active=='list-product'){ echo 'active'; } ?>" href="<?php echo base_url() ?>product">Daftar Produk</a>
+                        <a class="collapse-item text-secondary <?php if($submenu_active=='create-unit'){ echo 'active'; } ?>" href="<?php echo base_url() ?>product/unit_create">Input Unit</a>
+                        <a class="collapse-item text-secondary <?php if($submenu_active=='list-unit'){ echo 'active'; } ?>" href="<?php echo base_url() ?>product/unit_list">Daftar Unit</a>
                     </div>
                 </div>
             </li>
@@ -45,13 +45,13 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseClient"
                     aria-expanded="true" aria-controls="collapseClient">
                     <i class="fas fa-fw fa-handshake"></i>
-                    <span>Client</span>
+                    <span>Klien</span>
                 </a>
                 <div id="collapseClient" class="collapse <?php if($menu_active=='client'){ echo 'show'; } ?>" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-dark py-2 collapse-inner rounded">
-                        <a class="collapse-item text-secondary <?php if($submenu_active=='create-client'){ echo 'active'; } ?>" href="<?php echo base_url() ?>client/create_client"">New Client</a>
-                        <a class="collapse-item text-secondary <?php if($submenu_active=='list-client'){ echo 'active'; } ?>" href="<?php echo base_url() ?>client"">List Client</a>
+                        <a class="collapse-item text-secondary <?php if($submenu_active=='create-client'){ echo 'active'; } ?>" href="<?php echo base_url() ?>client/create_client">Input Klien</a>
+                        <a class="collapse-item text-secondary <?php if($submenu_active=='list-client'){ echo 'active'; } ?>" href="<?php echo base_url() ?>client">Daftar Klien</a>
                     </div>
                 </div>
             </li>
@@ -60,15 +60,15 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTransaction"
                     aria-expanded="true" aria-controls="collapseTransaction">
                     <i class="fas fa-fw fa-credit-card"></i>
-                    <span>Transaction</span>
+                    <span>Transaksi</span>
                 </a>
                 <div id="collapseTransaction" class="collapse <?php if($menu_active=='transaction'){ echo 'show'; } ?>" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-dark py-2 collapse-inner rounded">
-                        <a class="collapse-item text-secondary <?php if($submenu_active=='create-purchase'){ echo 'active'; } ?>" href="<?php echo base_url() ?>transaction/create_purchase"">New Purchase Request</a>
-                        <a class="collapse-item text-secondary <?php if($submenu_active=='list-purchase'){ echo 'active'; } ?>" href="<?php echo base_url() ?>transaction/purchase_list"">List Purchase Request</a>
-                        <a class="collapse-item text-secondary <?php if($submenu_active=='create-transaction'){ echo 'active'; } ?>" href="<?php echo base_url() ?>transaction/create_transaction"">New Transaction</a>
-                        <a class="collapse-item text-secondary <?php if($submenu_active=='list-transaction'){ echo 'active'; } ?>" href="<?php echo base_url() ?>transaction"">List Transaction</a>
+                        <a class="collapse-item text-secondary <?php if($submenu_active=='create-purchase'){ echo 'active'; } ?>" href="<?php echo base_url() ?>transaction/create_purchase">Input Permintaan Pembelian</a>
+                        <a class="collapse-item text-secondary <?php if($submenu_active=='list-purchase'){ echo 'active'; } ?>" href="<?php echo base_url() ?>transaction/purchase_list">Daftar Permintaan Pembelian</a>
+                        <a class="collapse-item text-secondary <?php if($submenu_active=='create-transaction'){ echo 'active'; } ?>" href="<?php echo base_url() ?>transaction/create_transaction">Input Transaksi</a>
+                        <a class="collapse-item text-secondary <?php if($submenu_active=='list-transaction'){ echo 'active'; } ?>" href="<?php echo base_url() ?>transaction">Daftar Transaksi</a>
                     </div>
                 </div>
             </li>
