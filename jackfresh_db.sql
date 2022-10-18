@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 25, 2022 at 02:44 PM
+-- Generation Time: Oct 18, 2022 at 03:39 PM
 -- Server version: 8.0.21
 -- PHP Version: 7.3.24-(to be removed in future macOS)
 
@@ -34,7 +34,7 @@ CREATE TABLE `clients` (
   `client_type` enum('Restaurant','Hotel','Personal') NOT NULL,
   `client_address` text,
   `client_phone` varchar(40) NOT NULL,
-  `cleint_email` varchar(255) DEFAULT NULL,
+  `client_email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `notes` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -42,7 +42,7 @@ CREATE TABLE `clients` (
 -- Dumping data for table `clients`
 --
 
-INSERT INTO `clients` (`id_client`, `client_code`, `client_name`, `client_type`, `client_address`, `client_phone`, `cleint_email`, `notes`) VALUES
+INSERT INTO `clients` (`id_client`, `client_code`, `client_name`, `client_type`, `client_address`, `client_phone`, `client_email`, `notes`) VALUES
 (1, 'HTL-01', 'Hotel Buana', 'Hotel', 'Solo', '0819231123', 'buana@gmail.com', 'tes'),
 (2, 'RST-01', 'Resto Mantap', 'Restaurant', 'Sukoharjo', '089231232', 'mantap@gmail.com', 'tes2');
 
@@ -68,7 +68,8 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id_product`, `product_code`, `product_name`, `is_active`, `product_photo`, `product_visibility`, `notes`) VALUES
 (1, 'SMP-1', 'Shampo', 1, NULL, 'Visible', 'tes'),
-(2, 'SBN-1', 'Sabun', 1, NULL, 'Visible', 'tes');
+(2, 'SBN-1', 'Sabun', 1, NULL, 'Visible', 'tes'),
+(4, 'SKT-01', 'Sikat Gigi', 1, NULL, 'Visible', 'tes');
 
 -- --------------------------------------------------------
 
@@ -81,17 +82,31 @@ CREATE TABLE `product_units` (
   `id_product` int NOT NULL,
   `id_unit` int NOT NULL,
   `qty` int NOT NULL,
-  `price` int NOT NULL
+  `price` int NOT NULL,
+  `stock` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `product_units`
 --
 
-INSERT INTO `product_units` (`id_product_unit`, `id_product`, `id_unit`, `qty`, `price`) VALUES
-(1, 1, 2, 5, 30000),
-(2, 1, 1, 40, 5000),
-(3, 2, 1, 40, 6000);
+INSERT INTO `product_units` (`id_product_unit`, `id_product`, `id_unit`, `qty`, `price`, `stock`) VALUES
+(1, 1, 2, 5, 30000, 40),
+(2, 1, 1, 40, 5000, 20),
+(3, 2, 1, 40, 6000, 10);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_unit_conversions`
+--
+
+CREATE TABLE `product_unit_conversions` (
+  `id_product_unit_conversion` int NOT NULL,
+  `id_product_unit_1` int NOT NULL,
+  `id_product_unit_2` int NOT NULL,
+  `conversion` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -254,6 +269,14 @@ ALTER TABLE `product_units`
   ADD KEY `fk_unit` (`id_unit`);
 
 --
+-- Indexes for table `product_unit_conversions`
+--
+ALTER TABLE `product_unit_conversions`
+  ADD PRIMARY KEY (`id_product_unit_conversion`),
+  ADD KEY `fk_product_unit_conversion_1` (`id_product_unit_1`),
+  ADD KEY `fk_product_unit_conversion_2` (`id_product_unit_2`);
+
+--
 -- Indexes for table `purchase`
 --
 ALTER TABLE `purchase`
@@ -301,19 +324,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id_client` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_client` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id_product` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_product` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `product_units`
 --
 ALTER TABLE `product_units`
   MODIFY `id_product_unit` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `product_unit_conversions`
+--
+ALTER TABLE `product_unit_conversions`
+  MODIFY `id_product_unit_conversion` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `purchase`
@@ -343,7 +372,7 @@ ALTER TABLE `transaction_product_units`
 -- AUTO_INCREMENT for table `units`
 --
 ALTER TABLE `units`
-  MODIFY `id_unit` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_unit` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -361,6 +390,13 @@ ALTER TABLE `users`
 ALTER TABLE `product_units`
   ADD CONSTRAINT `fk_product` FOREIGN KEY (`id_product`) REFERENCES `products` (`id_product`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_unit` FOREIGN KEY (`id_unit`) REFERENCES `units` (`id_unit`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Constraints for table `product_unit_conversions`
+--
+ALTER TABLE `product_unit_conversions`
+  ADD CONSTRAINT `fk_product_unit_conversion_1` FOREIGN KEY (`id_product_unit_1`) REFERENCES `product_units` (`id_product_unit`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_product_unit_conversion_2` FOREIGN KEY (`id_product_unit_2`) REFERENCES `product_units` (`id_product_unit`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `purchase_product_units`

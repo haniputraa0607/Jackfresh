@@ -13,6 +13,12 @@ class M_Client extends CI_Model{
         $this->db->where($where);
         return $this->db->get('clients');
     }
+
+    public function input($data, $table)
+    {
+        $input = $this->db->insert($table,$data);
+        return $input;
+    }
 }
 
 ?>
