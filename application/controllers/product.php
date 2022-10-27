@@ -18,7 +18,7 @@ class Product extends CI_Controller {
         $data = [
 			'content' => 'list_product',
 			'result'  => [
-				'title' 		 => 'List Product',
+				'title' 		 => 'Daftar Produk',
                 'menu_active' 	 => 'product',
                 'submenu_active' => 'list-product',
 				'products' 		 => $products
@@ -39,6 +39,22 @@ class Product extends CI_Controller {
 		];
 		$this->load->view('template/main',$data);
     }
+
+    public function detail_product(){
+        $products = $this->M_Product->getProduct_by_id($this->uri->segment(3));
+
+        $data = [
+			'content' => 'detail_product',
+			'result'  => [
+				'title' => 'Edit Produk',
+                'menu_active' => 'product',
+                'submenu_active' => 'detail-product',
+                'products' 		 => $products
+			],
+		];
+		$this->load->view('template/main',$data);
+    }
+
 
     public function unit_list(){
 		$units = $this->M_Product->getUnit([])->result();
@@ -66,12 +82,40 @@ class Product extends CI_Controller {
 		$this->load->view('template/main',$data);
     }
 
+
+
 	public function input_product(){
 		$data = [
 			'product_name'  	 => $this->input->post('product_name'),
 			'product_code'  	 => $this->input->post('product_code'),
 			'notes'       		 => $this->input->post('notes'),
+			'product_photo'  	 => $this->input->post('product_photo'),
+			'is_active'     	 => 1,
+			'product_visibility' => 'Visible',
+		];
+		$config['upload_path']   = './assets/img/product';
+		$config['allowed_types'] = 'gif|jpg|jpeg|png';
+		$config['max_size']      = 2000;
+		$config['file_name']     = $data['product_name'];
+		$this->load->library('upload', $config);
+		if ( ! $this->upload->do_upload('product_photo')){
+			$error = array('error' => $this->upload->display_errors());
+			// $this->load->view('v_upload', $error);
+			redirect('product/create_product');
+		}else{
+			$upload = array('upload_data' => $this->upload->data());
+			$data['product_photo'] = 'assets/img/product/'.$upload['upload_data']['file_name'];
+			// $this->load->view('v_upload_sukses', $data);
+			$input = $this->M_Product->input($data,'products');
+			redirect('product');
+		}
+    }
+    public function edit_product(){
+		$data = [
+			'product_name'  	 => $this->input->post('product_name'),
 			'product_code'  	 => $this->input->post('product_code'),
+			'notes'       		 => $this->input->post('notes'),
+			'product_photo'  	 => $this->input->post('product_photo'),
 			'is_active'     	 => 1,
 			'product_visibility' => 'Visible',
 		];

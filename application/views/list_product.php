@@ -1,6 +1,6 @@
 <!-- Page Heading -->
 <h1 class="h3 mb-2 text-gray-800"><?php echo $title; ?></h1>
-<p class="mb-4">List of products stored in the warehouse </p>
+<p class="mb-4">Daftar Produk yang tersedia </p>
 <div class="card shadow mb-4">
     <div class="card-body">
         <div class="table-responsive">
@@ -31,7 +31,7 @@
                         <td><?php echo $product->product_code ?></td>
                         <td class="text-center"><?php echo $product->product_visibility == 'Visible' ? 'True' : 'False' ?></td>
                         <td class="text-center">
-                            <a href="#" class="btn btn-primary btn-icon-split"><span class="text">Detail</span></a>
+                            <a href="<?php echo base_url().'product/detail_product/'.$product->id_product; ?>" class="btn btn-primary btn-icon-split"><span class="text">Detail</span></a>
                             <a href="<?php echo base_url().'product/delete/'.$product->id_product; ?>" class="btn btn-danger btn-icon-split"><span class="text">Delete</span></a>
                         </td>
                     </tr>
