@@ -13,6 +13,18 @@ class M_Product extends CI_Model{
         $this->db->where($where);
         return $this->db->get('units');
     }
+
+    public function input($data, $table)
+    {
+        $input = $this->db->insert($table,$data);
+        return $input;
+    }
+
+    public function delete($where, $table)
+    {
+        $this->db->where($where);
+        $this->db->delete($table);
+    }
 }
 
 ?>

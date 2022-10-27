@@ -22,17 +22,17 @@
                     </tr>
                 </tfoot>
                 <tbody>
-                    <?php foreach ($units ?? [] as $key => $unit) : ?>
+                    <?php foreach ($units ?? [] as $key => $unit){ ?>
                     <tr>
                         <td class="text-center"><?php echo $key+1 ?></td>
                         <td><?php echo $unit->unit_name ?></td>
                         <td class="text-center"><?php echo $unit->unit_visibility == 'Visible' ? 'True' : 'False' ?></td>
                         <td class="text-center">
                             <a href="#" class="btn btn-primary btn-icon-split"><span class="text">Detail</span></a>
-                            <a href="#" class="btn btn-danger btn-icon-split"><span class="text">Delete</span></a>
+                            <a href="<?php echo base_url().'product/delete_unit/'.$unit->id_unit; ?>" class="btn btn-danger btn-icon-split"><span class="text">Delete</span></a>
                         </td>
                     </tr>
-                    <?php endforeach; ?>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>

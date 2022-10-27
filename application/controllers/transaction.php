@@ -65,4 +65,16 @@ class Transaction extends CI_Controller {
 		$this->load->view('template/main',$data);
     }
 
+	public function delete($id){
+		$where = array ('id_transaction' => $id);
+        $this->M_Transaction->delete($where, 'transactions');
+        redirect('transaction');
+	}
+
+	public function delete_purchase($id){
+		$where = array ('id_purchase' => $id);
+        $this->M_Transaction->delete($where, 'purchase');
+        redirect('transaction/purchase_list');
+	}
+
 }
