@@ -102,6 +102,14 @@ class Product extends CI_Controller {
     }
 
 	public function delete($id){
-		var_dump($id);
+		$where = array ('id_product' => $id);
+        $this->M_Product->delete($where, 'products');
+        redirect('product');
+	}
+
+	public function delete_unit($id){
+		$where = array ('id_unit' => $id);
+        $this->M_Product->delete($where, 'units');
+        redirect('product/unit_list');
 	}
 }

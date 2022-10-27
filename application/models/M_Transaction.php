@@ -23,6 +23,12 @@ class M_Transaction extends CI_Model{
 		$this->db->join('clients', 'clients.id_client = purchase.id_client', 'left');
         return $this->db->get();
     }
+
+    public function delete($where, $table)
+    {
+        $this->db->where($where);
+        $this->db->delete($table);
+    }
 }
 
 ?>

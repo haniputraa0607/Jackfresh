@@ -19,6 +19,12 @@ class M_Product extends CI_Model{
         $input = $this->db->insert($table,$data);
         return $input;
     }
+
+    public function delete($where, $table)
+    {
+        $this->db->where($where);
+        $this->db->delete($table);
+    }
 }
 
 ?>

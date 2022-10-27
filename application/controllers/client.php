@@ -53,4 +53,10 @@ class Client extends CI_Controller {
 		redirect('client');
     }
 
+	public function delete($id){
+		$where = array ('id_client' => $id);
+        $this->M_Client->delete($where, 'clients');
+        redirect('client');
+	}
+
 }
