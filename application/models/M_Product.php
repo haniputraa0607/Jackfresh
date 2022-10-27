@@ -8,6 +8,13 @@ class M_Product extends CI_Model{
         return $this->db->get('products');
     }
 
+     function getProduct_by_id($id_product)
+    {
+        $this->db->where('id_product', $id_product);
+        $query = $this->db->get('products');
+        return $query->result();
+    }
+
     public function getUnit($where)
     {
         $this->db->where($where);
