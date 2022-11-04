@@ -31,7 +31,7 @@
             <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-2 col-form-label">Catatan</label>
                 <div class="col-sm-3">
-                    <textarea name="notes" class="form-control"> <?php echo $notes ?> </textarea>
+                    <textarea name="notes" class="form-control"><?php echo $notes ?> </textarea>
                 </div>
             </div>
             <div class="form-group row">
@@ -39,8 +39,9 @@
                 <div class="col-sm-3">
                     <div class="input-group">
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="product_photo" accept="image/*" >
+                            <input type="file" class="custom-file-input" name="product_photo" accept="image/*" > 
                             <label class="custom-file-label" for="exampleInputFile">Pilih Gambar</label>
+                            <!-- <?php echo $product_photo ?> -->
                         </div>
                     </div>
                 </div>

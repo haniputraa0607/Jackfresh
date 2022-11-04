@@ -13,31 +13,46 @@ class Client extends CI_Controller {
 		}
 	}
 
-    public function index(){
+	public function index(){
 		$clients = $this->M_Client->getClient([])->result();
-        $data = [
+		$data = [
 			'content' => 'list_client',
 			'result'  => [
 				'title' 		 => 'List Client',
-                'menu_active' 	 => 'client',
-                'submenu_active' => 'list-client',
+				'menu_active' 	 => 'client',
+				'submenu_active' => 'list-client',
 				'clients' 		 => $clients
 			],
 		];
 		$this->load->view('template/main',$data);
-    }
+	}
 
-    public function create_client(){
-        $data = [
+	public function create_client(){
+		$data = [
 			'content' => 'create_client',
 			'result'  => [
 				'title' => 'Klien Baru',
-                'menu_active' => 'client',
-                'submenu_active' => 'create-client'
+				'menu_active' => 'client',
+				'submenu_active' => 'create-client'
 			],
 		];
 		$this->load->view('template/main',$data);
-    }
+	}
+
+	public function detail_client(){
+		$clients = $this->M_Client->getClient_by_id($this->uri->segment(3));
+
+		$data = [
+			'content' => 'detail_client',
+			'result'  => [
+				'title' 		 => 'Edit Info Klien',
+				'menu_active' 	 => 'client',
+				'submenu_active' => 'detail-client',
+				'clients' 		 => $clients
+			],
+		];
+		$this->load->view('template/main',$data);
+	}
 
 	public function input_client(){
 		$data = [
@@ -51,12 +66,26 @@ class Client extends CI_Controller {
 		];
 		$input = $this->M_Client->input($data,'clients');
 		redirect('client');
-    }
+	}
+
+	public function edit_client(){
+		$data = [
+			'client_name'  	 => $this->input->post('client_name'),
+			'client_code'  	 => $this->input->post('client_code'),
+			'client_phone'   => $this->input->post('client_phone'),
+			'client_email'   => $this->input->post('client_email'),
+			'client_type'  	 => $this->input->post('client_type'),
+			'client_address' => $this->input->post('client_address'),
+			'notes'  	     => $this->input->post('notes'),
+		];
+		$input = $this->M_Client->update($data,'clients');
+		redirect('client');
+	}
 
 	public function delete($id){
 		$where = array ('id_client' => $id);
-        $this->M_Client->delete($where, 'clients');
-        redirect('client');
+		$this->M_Client->delete($where, 'clients');
+		redirect('client');
 	}
 
 }

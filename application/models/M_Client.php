@@ -20,6 +20,20 @@ class M_Client extends CI_Model{
         return $input;
     }
 
+    function getClient_by_id($id_client)
+    {
+        $this->db->where('id_client', $id_client);
+        $query = $this->db->get('clients');
+        return $query->result();
+    }
+
+    public function update($data, $table, $id_client)
+    {
+        $this->db->where('id_client', $id_client);
+        $input = $this->db->update($table,$data);
+        return $input;
+    }
+
     public function delete($where, $table)
     {
         $this->db->where($where);
