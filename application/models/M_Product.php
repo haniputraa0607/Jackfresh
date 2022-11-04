@@ -27,6 +27,13 @@ class M_Product extends CI_Model{
         return $input;
     }
 
+    public function update($data, $table)
+    {
+        $this->db->where('id_product', $id_product);
+        $input = $this->db->update($table,$data);
+        return $input;
+    }
+
     public function delete($where, $table)
     {
         $this->db->where($where);

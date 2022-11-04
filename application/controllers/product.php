@@ -132,7 +132,7 @@ class Product extends CI_Controller {
 			$upload = array('upload_data' => $this->upload->data());
 			$data['product_photo'] = 'assets/img/product/'.$upload['upload_data']['file_name'];
 			// $this->load->view('v_upload_sukses', $data);
-			$input = $this->M_Product->input($data,'products');
+			$update = $this->M_Product->update($data,'products');
 			redirect('product');
 		}
     }
