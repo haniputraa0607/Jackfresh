@@ -18,7 +18,7 @@ class Client extends CI_Controller {
 		$data = [
 			'content' => 'list_client',
 			'result'  => [
-				'title' 		 => 'List Client',
+				'title' 		 => 'Daftar Klien',
 				'menu_active' 	 => 'client',
 				'submenu_active' => 'list-client',
 				'clients' 		 => $clients
@@ -31,7 +31,7 @@ class Client extends CI_Controller {
 		$data = [
 			'content' => 'create_client',
 			'result'  => [
-				'title' => 'Klien Baru',
+				'title' => 'Pelanggan Baru',
 				'menu_active' => 'client',
 				'submenu_active' => 'create-client'
 			],
@@ -45,7 +45,7 @@ class Client extends CI_Controller {
 		$data = [
 			'content' => 'detail_client',
 			'result'  => [
-				'title' 		 => 'Edit Info Klien',
+				'title' 		 => 'Detail Klien',
 				'menu_active' 	 => 'client',
 				'submenu_active' => 'detail-client',
 				'clients' 		 => $clients
@@ -68,7 +68,7 @@ class Client extends CI_Controller {
 		redirect('client');
 	}
 
-	public function edit_client(){
+	public function edit_client($id){
 		$data = [
 			'client_name'  	 => $this->input->post('client_name'),
 			'client_code'  	 => $this->input->post('client_code'),
@@ -78,7 +78,7 @@ class Client extends CI_Controller {
 			'client_address' => $this->input->post('client_address'),
 			'notes'  	     => $this->input->post('notes'),
 		];
-		$input = $this->M_Client->update($data,'clients');
+		$input = $this->M_Client->update($data,'clients',$id);
 		redirect('client');
 	}
 

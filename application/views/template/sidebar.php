@@ -45,13 +45,13 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseClient"
                     aria-expanded="true" aria-controls="collapseClient">
                     <i class="fas fa-fw fa-handshake"></i>
-                    <span>Klien</span>
+                    <span>Pelanggan</span>
                 </a>
                 <div id="collapseClient" class="collapse <?php if($menu_active=='client'){ echo 'show'; } ?>" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-dark py-2 collapse-inner rounded">
-                        <a class="collapse-item text-secondary <?php if($submenu_active=='create-client'){ echo 'active'; } ?>" href="<?php echo base_url() ?>client/create_client">Input Klien</a>
-                        <a class="collapse-item text-secondary <?php if($submenu_active=='list-client'){ echo 'active'; } ?>" href="<?php echo base_url() ?>client">Daftar Klien</a>
+                        <a class="collapse-item text-secondary <?php if($submenu_active=='create-client'){ echo 'active'; } ?>" href="<?php echo base_url() ?>client/create_client">Input Pelanggan</a>
+                        <a class="collapse-item text-secondary <?php if($submenu_active=='list-client'){ echo 'active'; } ?>" href="<?php echo base_url() ?>client">Daftar Pelanggan</a>
                     </div>
                 </div>
             </li>
@@ -65,8 +65,8 @@
                 <div id="collapseTransaction" class="collapse <?php if($menu_active=='transaction'){ echo 'show'; } ?>" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-dark py-2 collapse-inner rounded">
-                        <a class="collapse-item text-secondary <?php if($submenu_active=='create-purchase'){ echo 'active'; } ?>" href="<?php echo base_url() ?>transaction/create_purchase">Input Permintaan Pembelian</a>
-                        <a class="collapse-item text-secondary <?php if($submenu_active=='list-purchase'){ echo 'active'; } ?>" href="<?php echo base_url() ?>transaction/purchase_list">Daftar Permintaan Pembelian</a>
+                        <a class="collapse-item text-secondary <?php if($submenu_active=='create-purchase'){ echo 'active'; } ?>" href="<?php echo base_url() ?>transaction/create_purchase">Input Permintaan</a>
+                        <a class="collapse-item text-secondary <?php if($submenu_active=='list-purchase'){ echo 'active'; } ?>" href="<?php echo base_url() ?>transaction/purchase_list">Daftar Permintaan</a>
                         <a class="collapse-item text-secondary <?php if($submenu_active=='create-transaction'){ echo 'active'; } ?>" href="<?php echo base_url() ?>transaction/create_transaction">Input Transaksi</a>
                         <a class="collapse-item text-secondary <?php if($submenu_active=='list-transaction'){ echo 'active'; } ?>" href="<?php echo base_url() ?>transaction">Daftar Transaksi</a>
                     </div>

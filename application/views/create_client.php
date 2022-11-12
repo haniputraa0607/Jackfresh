@@ -1,35 +1,35 @@
 <!-- Page Heading -->
 <h1 class="h3 mb-2 text-gray-800"><?php echo $title; ?></h1>
-<p class="mb-4">Daftarkan Klien Baru</p>
+<p class="mb-4">Daftarkan Pelanggan Baru</p>
 <div class="card shadow mb-4">
     <div class="card-body">
         <form role="form" action="<?php echo base_url().'client/input_client'; ?>" method="post" enctype="multipart/form-data">
             <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">Nama Klein</label>
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Nama Pelanggan</label>
                 <div class="col-sm-3">
                     <input type="text" class="form-control" name="client_name" required>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">Kode Klein</label>
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Kode Pelanggan</label>
                 <div class="col-sm-3">
                     <input type="text" class="form-control" name="client_code" required>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">No. HP Klein</label>
+                <label for="inputEmail3" class="col-sm-2 col-form-label">No. HP Pelanggan</label>
                 <div class="col-sm-3">
                     <input type="text" class="form-control" name="client_phone" required>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">Email Klein</label>
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Email Pelanggan</label>
                 <div class="col-sm-3">
                     <input type="email" class="form-control" name="client_email" required>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">Jenis Klein</label>
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Jenis Pelanggan</label>
                 <div class="col-sm-3">
                     <select class="form-control" name="client_type">
                         <option value="" selected disabled></option>
@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">Alamat Klein</label>
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Alamat Pelanggan</label>
                 <div class="col-sm-3">
                     <textarea name="client_address" class="form-control"></textarea>
                 </div>

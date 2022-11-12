@@ -40,16 +40,19 @@ class Product extends CI_Controller {
 		$this->load->view('template/main',$data);
     }
 
-    public function detail_product(){
-        $products = $this->M_Product->getProduct_by_id($this->uri->segment(3));
-
+    public function detail_product($id){
+        $products = $this->M_Product->getProduct_by_id($id);
+		$units = $this->M_Product->getProductUnits($id)->result();
+		$list_unit = $this->M_Product->getUnit([])->result();
         $data = [
 			'content' => 'detail_product',
 			'result'  => [
-				'title' => 'Edit Produk',
+				'title' => 'Detail Produk',
                 'menu_active' => 'product',
-                'submenu_active' => 'detail-product',
-                'products' 		 => $products
+                'submenu_active' => 'list-product',
+                'products' 		 => $products,
+				'units'			 => $units,
+				'all_units'		 => $list_unit,		
 			],
 		];
 		$this->load->view('template/main',$data);
@@ -61,7 +64,7 @@ class Product extends CI_Controller {
         $data = [
 			'content' => 'list_unit',
 			'result'  => [
-				'title' 		 => 'List Unit',
+				'title' 		 => 'Daftar Unit',
                 'menu_active'    => 'product',
                 'submenu_active' => 'list-unit',
 				'units' 		 => $units
@@ -110,31 +113,46 @@ class Product extends CI_Controller {
 			redirect('product');
 		}
     }
-    public function edit_product(){
-		$data = [
-			'product_name'  	 => $this->input->post('product_name'),
-			'product_code'  	 => $this->input->post('product_code'),
-			'notes'       		 => $this->input->post('notes'),
-			'product_photo'  	 => $this->input->post('product_photo'),
-			'is_active'     	 => 1,
-			'product_visibility' => 'Visible',
-		];
-		$config['upload_path']   = './assets/img/product';
-		$config['allowed_types'] = 'gif|jpg|jpeg|png';
-		$config['max_size']      = 2000;
-		$config['file_name']     = $data['product_name'];
-		$this->load->library('upload', $config);
-		if ( ! $this->upload->do_upload('product_photo')){
-			$error = array('error' => $this->upload->display_errors());
-			// $this->load->view('v_upload', $error);
-			redirect('product/create_product');
-		}else{
-			$upload = array('upload_data' => $this->upload->data());
-			$data['product_photo'] = 'assets/img/product/'.$upload['upload_data']['file_name'];
-			// $this->load->view('v_upload_sukses', $data);
-			$update = $this->M_Product->update($data,'products');
+
+    public function edit_product($id_product){
+		$product_photo = $this->input->post('product_photo');
+		if($product_photo == NULL){
+			$data = [
+				'product_name'  	 => $this->input->post('product_name'),
+				'product_code'  	 => $this->input->post('product_code'),
+				'notes'       		 => $this->input->post('notes'),
+				'is_active'     	 => 1,
+				'product_visibility' => 'Visible',
+			];
+			$update = $this->M_Product->update($data,'products', $id_product);
 			redirect('product');
+		} else {
+			$data = [
+				'product_name'  	 => $this->input->post('product_name'),
+				'product_code'  	 => $this->input->post('product_code'),
+				'notes'       		 => $this->input->post('notes'),
+				'product_photo'  	 => $$product_photo,
+				'is_active'     	 => 1,
+				'product_visibility' => 'Visible',
+			];
+			$config['upload_path']   = './assets/img/product';
+			$config['allowed_types'] = 'gif|jpg|jpeg|png';
+			$config['max_size']      = 2000;
+			$config['file_name']     = $data['product_name'];
+			$this->load->library('upload', $config);
+			if ( ! $this->upload->do_upload('product_photo')){
+				$error = array('error' => $this->upload->display_errors());
+			// $this->load->view('v_upload', $error);
+				redirect('product/create_product');
+			}else{
+				$upload = array('upload_data' => $this->upload->data());
+				$data['product_photo'] = 'assets/img/product/'.$upload['upload_data']['file_name'];
+				// $this->load->view('v_upload_sukses', $data);
+				$update = $this->M_Product->update($data,'products', $id_product);
+				redirect('product');
+			}
 		}
+		
     }
 
 	public function input_unit(){
@@ -155,5 +173,40 @@ class Product extends CI_Controller {
 		$where = array ('id_unit' => $id);
         $this->M_Product->delete($where, 'units');
         redirect('product/unit_list');
+	}
+
+	public function detail_unit($id){
+        $units = $this->M_Product->getUnit_by_id($id);
+
+        $data = [
+			'content' => 'detail_unit',
+			'result'  => [
+				'title' => 'Detail Unit',
+                'menu_active' => 'product',
+                'submenu_active' => 'list-unit',
+                'units' 		 => $units
+			],
+		];
+		$this->load->view('template/main',$data);
+    }
+
+	public function update_unit($id){
+		$data = [
+			'unit_name'  	 => $this->input->post('unit_name'),
+		];
+		$input = $this->M_Product->update($data,'units',$id);
+		redirect('product/detail_unit/'.$id);
+
+	}
+
+	public function input_product_unit($id){
+		$data = [
+			'id_product' => $id,
+			'id_unit'  	 => $this->input->post('id_unit'),
+			'stock'  	 => $this->input->post('stock'),
+			'price'  	 => $this->input->post('id_unit'),
+		];
+		$input = $this->M_Product->input($data,'product_units');
+		redirect('product/detail_product/'.$id);
 	}
 }

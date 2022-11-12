@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 27, 2022 at 05:12 PM
+-- Generation Time: Nov 12, 2022 at 07:48 AM
 -- Server version: 8.0.21
 -- PHP Version: 7.3.24-(to be removed in future macOS)
 
@@ -15,7 +15,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `jackfresh_db`
@@ -34,9 +34,16 @@ CREATE TABLE `clients` (
   `client_type` enum('Restaurant','Hotel','Personal') NOT NULL,
   `client_address` text,
   `client_phone` varchar(40) NOT NULL,
-  `client_email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `client_email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `notes` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `clients`
+--
+
+INSERT INTO `clients` (`id_client`, `client_code`, `client_name`, `client_type`, `client_address`, `client_phone`, `client_email`, `notes`) VALUES
+(4, 'RST-1', 'Resto 12', 'Restaurant', 'Solo asdasd', '081923123', 'resto@gmail.com', 'asd       ');
 
 -- --------------------------------------------------------
 
@@ -49,17 +56,17 @@ CREATE TABLE `products` (
   `product_code` varchar(45) NOT NULL,
   `product_name` varchar(100) NOT NULL,
   `is_active` tinyint NOT NULL DEFAULT '0',
-  `product_photo` varchar(450) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `product_photo` varchar(450) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `product_visibility` enum('Visible','Hidden') NOT NULL,
-  `notes` text CHARACTER SET utf8 COLLATE utf8_general_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `notes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`id_product`, `product_code`, `product_name`, `is_active`, `product_photo`, `product_visibility`, `notes`) VALUES
-(2, 'SBN-1', 'Sabun', 1, NULL, 'Visible', 'tes'),
+(2, 'SBN-01', 'Sabun', 1, 'assets/img/product/Sabun_Coli.png', 'Visible', 'ya'),
 (4, 'SKT-01', 'Sikat Gigi', 1, NULL, 'Visible', 'tes');
 
 -- --------------------------------------------------------
@@ -75,7 +82,15 @@ CREATE TABLE `product_units` (
   `qty` int NOT NULL,
   `price` int NOT NULL,
   `stock` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `product_units`
+--
+
+INSERT INTO `product_units` (`id_product_unit`, `id_product`, `id_unit`, `qty`, `price`, `stock`) VALUES
+(4, 2, 2, 5, 30000, 4),
+(7, 2, 5, 0, 5, 6);
 
 -- --------------------------------------------------------
 
@@ -88,7 +103,7 @@ CREATE TABLE `product_unit_conversions` (
   `id_product_unit_1` int NOT NULL,
   `id_product_unit_2` int NOT NULL,
   `conversion` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -99,11 +114,11 @@ CREATE TABLE `product_unit_conversions` (
 CREATE TABLE `purchase` (
   `id_purchase` int NOT NULL,
   `id_client` int DEFAULT NULL,
-  `purchase_code` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `purchase_code` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `purchase_date` datetime NOT NULL,
-  `status` enum('Pending','Process','Finished') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `notes` text CHARACTER SET utf8 COLLATE utf8_general_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `status` enum('Pending','Process','Finished') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `notes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -117,7 +132,7 @@ CREATE TABLE `purchase_product_units` (
   `id_product_unit` int NOT NULL,
   `qty` int NOT NULL,
   `status` tinyint NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -134,7 +149,7 @@ CREATE TABLE `transactions` (
   `grand_total` int NOT NULL,
   `status` enum('Pending','Process','Finished') NOT NULL,
   `notes` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -149,7 +164,7 @@ CREATE TABLE `transaction_product_units` (
   `qty` int NOT NULL,
   `price` int NOT NULL,
   `status` tinyint NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -161,14 +176,15 @@ CREATE TABLE `units` (
   `id_unit` int NOT NULL,
   `unit_name` varchar(45) NOT NULL,
   `unit_visibility` enum('Visible','Hidden') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `units`
 --
 
 INSERT INTO `units` (`id_unit`, `unit_name`, `unit_visibility`) VALUES
-(2, 'Lusin', 'Hidden');
+(2, 'Lusin', 'Hidden'),
+(5, 'PCS', 'Visible');
 
 -- --------------------------------------------------------
 
@@ -178,11 +194,11 @@ INSERT INTO `units` (`id_unit`, `unit_name`, `unit_visibility`) VALUES
 
 CREATE TABLE `users` (
   `id_user` int NOT NULL,
-  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `username` varchar(20) NOT NULL,
   `password` varchar(10) NOT NULL,
   `is_admin` tinyint NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `users`
@@ -274,7 +290,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id_client` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_client` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -286,7 +302,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `product_units`
 --
 ALTER TABLE `product_units`
-  MODIFY `id_product_unit` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_product_unit` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `product_unit_conversions`
@@ -322,7 +338,7 @@ ALTER TABLE `transaction_product_units`
 -- AUTO_INCREMENT for table `units`
 --
 ALTER TABLE `units`
-  MODIFY `id_unit` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_unit` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
