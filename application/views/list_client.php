@@ -1,6 +1,6 @@
 <!-- Page Heading -->
 <h1 class="h3 mb-2 text-gray-800"><?php echo $title; ?></h1>
-<p class="mb-4">List of client </p>
+<p class="mb-4">Daftar klien yang terdaftar</p>
 <div class="card shadow mb-4">
     <div class="card-body">
         <div class="table-responsive">
@@ -8,18 +8,18 @@
                 <thead class="text-center">
                     <tr>
                         <th>No</th>
-                        <th>Nama Klien</th>
-                        <th>Kode Klien</th>
-                        <th>Jenis Klien</th>
+                        <th>Nama Pelanggan</th>
+                        <th>Kode Pelanggan</th>
+                        <th>Jenis Pelanggan</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tfoot class="text-center">
                     <tr>
                         <th>No</th>
-                        <th>Nama Klien</th>
-                        <th>Kode Klien</th>
-                        <th>Jenis Klien</th>
+                        <th>Nama Pelanggan</th>
+                        <th>Kode Pelanggan</th>
+                        <th>Jenis Pelanggan</th>
                         <th>Aksi</th>
                     </tr>
                 </tfoot>
@@ -29,7 +29,7 @@
                         <td class="text-center"><?php echo $key+1 ?></td>
                         <td><?php echo $client->client_name ?></td>
                         <td><?php echo $client->client_code ?></td>
-                        <td><?php echo $client->client_type ?></td>
+                        <td><?= $client->client_type == 'Hotel' ? 'Hotel' : $client->client_type == 'Restaurant' ? 'Restoran' : 'Personal' ?></td>
                         <td class="text-center">
                             <a href="<?php echo base_url().'client/detail_client/'.$client->id_client; ?>" class="btn btn-primary btn-icon-split"><span class="text">Detail</span></a>
                             <a href="<?php echo base_url().'client/delete/'.$client->id_client; ?>" class="btn btn-danger btn-icon-split"><span class="text">Delete</span></a>
