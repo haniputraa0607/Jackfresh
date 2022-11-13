@@ -44,6 +44,7 @@ class Product extends CI_Controller {
         $products = $this->M_Product->getProduct_by_id($id);
 		$units = $this->M_Product->getProductUnits($id)->result();
 		$list_unit = $this->M_Product->getUnit([])->result();
+		$value_product_units = $this->M_Product->getProductUnit_by_id($id);
         $data = [
 			'content' => 'detail_product',
 			'result'  => [
@@ -52,7 +53,8 @@ class Product extends CI_Controller {
                 'submenu_active' => 'list-product',
                 'products' 		 => $products,
 				'units'			 => $units,
-				'all_units'		 => $list_unit,		
+				'all_units'		 => $list_unit,	
+				'value_product_units'   => $value_product_units,	
 			],
 		];
 		$this->load->view('template/main',$data);
@@ -204,9 +206,11 @@ class Product extends CI_Controller {
 			'id_product' => $id,
 			'id_unit'  	 => $this->input->post('id_unit'),
 			'stock'  	 => $this->input->post('stock'),
-			'price'  	 => $this->input->post('id_unit'),
+			'price'  	 => $this->input->post('price'),
 		];
 		$input = $this->M_Product->input($data,'product_units');
 		redirect('product/detail_product/'.$id);
 	}
+
+	
 }

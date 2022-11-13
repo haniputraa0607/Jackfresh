@@ -1,8 +1,8 @@
 <!-- Page Heading -->
 <?php 
-	$product_units = [];
-	$product_units = array_column($units, 'id_unit');
-	// var_dump($all_units);
+$product_units = [];
+$product_units = array_column($units, 'id_unit');
+	// var_dump($value_products_units);
 	// die;
 ?>
 <h1 class="h3 mb-2 text-gray-800"><?php echo $title; ?></h1>
@@ -78,7 +78,10 @@
 									<td><?php echo $unit->stock ?></td>
 									<td><?php echo $unit->price ?></td>
 									<td class="text-center">
-										<a href="#" class="btn btn-primary btn-icon-split"><span class="text">Detail</span></a>
+										<!-- <a href="#" class="btn btn-primary btn-icon-split"><span class="text">Detail</span></a> -->
+										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEditUnitProduct">
+											Detail
+										</button>
 									</td>
 								</tr>
 							<?php } ?>
@@ -112,31 +115,78 @@
 							<select class="form-control" name="id_unit" required>
 								<option value="" selected disabled></option>
 								<?php foreach($all_units ?? [] as $all_unit){ ?>
-								<?php if(!in_array($all_unit->id_unit,$product_units)) { ?>	
-								<option value="<?= $all_unit->id_unit ?>" ><?= $all_unit->unit_name ?></option>
-								<?php } } ?>
-							</select>
+									<?php if(!in_array($all_unit->id_unit,$product_units)) { ?>	
+										<option value="<?= $all_unit->id_unit ?>" ><?= $all_unit->unit_name ?></option>
+									<?php } } ?>
+								</select>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-3"></div>
+							<label for="inputEmail3" class="col-sm-2 col-form-label">Stock</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" name="stock" required>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-3"></div>
+							<label for="inputEmail3" class="col-sm-2 col-form-label">Harga</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" name="price"  required>
+							</div>
 						</div>
 					</div>
-					<div class="form-group row">
-						<div class="col-sm-3"></div>
-						<label for="inputEmail3" class="col-sm-2 col-form-label">Stock</label>
-						<div class="col-sm-4">
-							<input type="text" class="form-control" name="stock" required>
-						</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary">Tambah</button>
 					</div>
-					<div class="form-group row">
-						<div class="col-sm-3"></div>
-						<label for="inputEmail3" class="col-sm-2 col-form-label">Harga</label>
-						<div class="col-sm-4">
-							<input type="text" class="form-control" name="price" required>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary">Tambah</button>
-				</div>
-			</form>
+				</form>
+			</div>
 		</div>
 	</div>
-</div>
+
+	<div class="modal fade" id="modalEditUnitProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Edit Unit/Harga Produk</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form role="form" action="<?php echo base_url().'product/edit_product_unit/'.$products->id_product; ?>" method="post" enctype="multipart/form-data">
+						<div class="form-group row">
+							<div class="col-sm-3"></div>
+							<label for="inputEmail3" class="col-sm-2 col-form-label">Unit</label>
+							<div class="col-sm-4">
+								<select class="form-control" name="id_unit" required>
+									<option value="" selected disabled></option>
+									<?php foreach($all_units ?? [] as $all_unit){ ?>
+										
+											<option value="<?= $all_unit->id_unit ?>" ><?= $all_unit->unit_name ?></option>
+										<?php } ?>
+									</select>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-3"></div>
+								<label for="inputEmail3" class="col-sm-2 col-form-label">Stock</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" name="stock" value="<?= $value_product_units->stock ?>" required>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-3"></div>
+								<label for="inputEmail3" class="col-sm-2 col-form-label">Harga</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" name="price"  value="<?= $value_product_units->price ?>" required>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-primary">Edit</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>

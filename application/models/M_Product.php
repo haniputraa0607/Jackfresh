@@ -15,6 +15,19 @@ class M_Product extends CI_Model{
         return $query->row();
     }
 
+    public function getProductUnit_by_id($id_product_unit)
+    {
+        // $this->db->where('id_product_unit', $id_product_unit);
+        
+        // $this->db->select('product_units.*, products.product_name, units.unit_name');
+        // $this->db->from('product_units');
+        $this->db->where('product_units.id_product',$id_product_unit);
+        $this->db->join('products', 'products.id_product = product_units.id_product');
+        $this->db->join('units', 'units.id_unit = product_units.id_unit');
+        $query = $this->db->get('product_units');
+        return $query->row();
+    }
+
     public function getUnit_by_id($id_unit)
     {
         $this->db->where('id_unit', $id_unit);
