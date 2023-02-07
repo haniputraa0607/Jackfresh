@@ -34,8 +34,8 @@
                         <td class="text-center"><?php echo $transaction->client_name ?? '-' ?></td>
                         <td class="text-center"><?php echo $transaction->total ?></td>
                         <td class="text-center">
-                            <a href="#" class="btn btn-primary btn-icon-split"><span class="text">Detail</span></a>
-                            <a href="<?php echo base_url().'transaction/delete/'.$transaction->id_transac$transaction; ?>" class="btn btn-danger btn-icon-split"><span class="text">Delete</span></a>
+                            <a href="<?php echo base_url().'transaction/detail/'.$transaction->id_transaction; ?>" class="btn btn-primary btn-icon-split"><span class="text">Detail</span></a>
+                            <a href="<?php echo base_url().'transaction/delete/'.$transaction->id_transaction; ?>" class="btn btn-danger btn-icon-split"><span class="text">Delete</span></a>
                         </td>
                     </tr>
                     <?php endforeach; ?>

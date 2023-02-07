@@ -1,9 +1,7 @@
 <!-- Page Heading -->
 <?php 
-$product_units = [];
-$product_units = array_column($units, 'id_unit');
-	// var_dump($value_products_units);
-	// die;
+	$product_units = [];
+	$product_units = array_column($units, 'id_unit');
 ?>
 <h1 class="h3 mb-2 text-gray-800"><?php echo $title; ?></h1>
 <p class="mb-4">Detail data produk yang terdaftar</p>
@@ -78,12 +76,50 @@ $product_units = array_column($units, 'id_unit');
 									<td><?php echo $unit->stock ?></td>
 									<td><?php echo $unit->price ?></td>
 									<td class="text-center">
-										<!-- <a href="#" class="btn btn-primary btn-icon-split"><span class="text">Detail</span></a> -->
-										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEditUnitProduct">
-											Detail
-										</button>
+										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal<?php echo $unit->id_product_unit; ?>">Detail</button>
+										<a href="<?php echo base_url().'product/delete_product_unit/'.$products->id_product.'/'.$unit->id_product_unit; ?>" class="btn btn-danger btn-icon-split"><span class="text">Hapus</span></a>
 									</td>
 								</tr>
+								<div class="modal fade" id="modal<?php echo $unit->id_product_unit; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">Detail <?= $products->product_name.' Unit '.$unit->unit_name ?> </h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												<form role="form" action="<?php echo base_url().'product/update_product_unit/'.$products->id_product.'/'.$unit->id_product_unit; ?>" method="post" enctype="multipart/form-data">
+													<div class="form-group row">
+														<div class="col-sm-3"></div>
+														<label for="inputEmail3" class="col-sm-2 col-form-label">Unit</label>
+														<div class="col-sm-4">
+															<input type="text" class="form-control" readonly value="<?php echo $unit->unit_name ?>">
+														</div>
+													</div>
+													<div class="form-group row">
+														<div class="col-sm-3"></div>
+														<label for="inputEmail3" class="col-sm-2 col-form-label">Stock</label>
+														<div class="col-sm-4">
+															<input type="number" class="form-control" name="stock" required value="<?php echo $unit->stock ?>">
+														</div>
+													</div>
+													<div class="form-group row">
+														<div class="col-sm-3"></div>
+														<label for="inputEmail3" class="col-sm-2 col-form-label">Harga</label>
+														<div class="col-sm-4">
+															<input type="number" class="form-control" name="price" required value="<?php echo $unit->price ?>">
+														</div>
+													</div>
+																			</div>
+												<div class="modal-footer">
+													<button type="submit" class="btn btn-primary">Update</button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
 							<?php } ?>
 						</tbody>
 					</table>
@@ -121,19 +157,19 @@ $product_units = array_column($units, 'id_unit');
 								</select>
 							</div>
 						</div>
-						<div class="form-group row">
-							<div class="col-sm-3"></div>
-							<label for="inputEmail3" class="col-sm-2 col-form-label">Stock</label>
-							<div class="col-sm-4">
-								<input type="text" class="form-control" name="stock" required>
-							</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-sm-3"></div>
+						<label for="inputEmail3" class="col-sm-2 col-form-label">Stock</label>
+						<div class="col-sm-4">
+							<input type="number" class="form-control" name="stock" required>
 						</div>
-						<div class="form-group row">
-							<div class="col-sm-3"></div>
-							<label for="inputEmail3" class="col-sm-2 col-form-label">Harga</label>
-							<div class="col-sm-4">
-								<input type="text" class="form-control" name="price"  required>
-							</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-sm-3"></div>
+						<label for="inputEmail3" class="col-sm-2 col-form-label">Harga</label>
+						<div class="col-sm-4">
+							<input type="number" class="form-control" name="price" required>
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -190,3 +226,6 @@ $product_units = array_column($units, 'id_unit');
 				</div>
 			</div>
 		</div>
+	</div>
+</div>
+
