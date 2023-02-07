@@ -7,6 +7,8 @@ class Transaction extends CI_Controller {
 		parent::__construct();		
 		$this->load->library('form_validation');
 		$this->load->model('M_Transaction');
+		$this->load->model('M_Client');
+		$this->load->model('M_Product');
 
 		if(!$this->session->userdata('logged_in')){
 			redirect ('auth/index');
@@ -28,12 +30,23 @@ class Transaction extends CI_Controller {
     }
 
     public function create_transaction(){
+		$clients = $this->M_Client->getClient([])->result();
+		$products = $this->M_Product->getProduct([])->result();
+		$products = array_map(function($val){
+			$val->units = $this->M_Product->getProductUnits($val->id_product)->result();
+			$val->units = json_encode($val->units);
+			// $val->units = str_replace('"', '\'', $val->units);
+			return $val;
+		},$products);
 		$data = [
-			'content' => 'main',
+			'content' => 'create_transaction',
 			'result'  => [
-				'title' => 'New Transaction',
+				'title' => 'Buat Transaksi Baru',
                 'menu_active' => 'transaction',
-                'submenu_active' => 'create-transaction'
+                'submenu_active' => 'create-transaction',
+
+				'clients' 	 => $clients,
+				'products' 	 => $products
 			],
 		];
 		$this->load->view('template/main',$data);
@@ -41,27 +54,40 @@ class Transaction extends CI_Controller {
 
     public function purchase_list(){
 		$purchases = $this->M_Transaction->getPurchase([])->result();
+		$clients = $this->M_Client->getClient([])->result();
 		$data = [
 			'content' => 'list_purchase',
 			'result'  => [
 				'title' 		 => 'List Purchase Request',
                 'menu_active' 	 => 'transaction',
                 'submenu_active' => 'list-purchase',
-				'purchases' 	 => $purchases
+				'purchases' 	 => $purchases,
+				'clients' 	 	 => $clients
 			],
 		];
 		$this->load->view('template/main',$data);
     }
 
     public function create_purchase(){
+		$clients = $this->M_Client->getClient([])->result();
+		$products = $this->M_Product->getProduct([])->result();
+		$products = array_map(function($val){
+			$val->units = $this->M_Product->getProductUnits($val->id_product)->result();
+			$val->units = json_encode($val->units);
+			// $val->units = str_replace('"', '\'', $val->units);
+			return $val;
+		},$products);
 		$data = [
-			'content' => 'main',
+			'content' => 'create_purchase',
 			'result'  => [
-				'title' => 'New Purchase Request',
+				'title' => 'Buat Permintaan Baru',
                 'menu_active' => 'transaction',
-                'submenu_active' => 'create-purchase'
+                'submenu_active' => 'create-purchase',
+				'clients' 	 => $clients,
+				'products' 	 => $products
 			],
 		];
+
 		$this->load->view('template/main',$data);
     }
 
@@ -75,6 +101,116 @@ class Transaction extends CI_Controller {
 		$where = array ('id_purchase' => $id);
         $this->M_Transaction->delete($where, 'purchase');
         redirect('transaction/purchase_list');
+	}
+
+	public function input_transaction(){
+		$data = [
+			'transaction_code' => $this->input->post('transaction_code'),
+			'id_client' => $this->input->post('id_client') ?? null,
+			'transaction_date' => $this->input->post('transaction_date'),
+			'notes' => $this->input->post('notes'),
+		];
+		$product = $this->input->post('products') ?? null;
+		$input = $this->M_Transaction->inputTransaction($data, $product);
+		redirect('transaction');
+	}
+
+	public function input_purchase(){
+		$data = [
+			'purchase_code' => $this->input->post('purchase_code'),
+			'id_client' => $this->input->post('id_client') ?? null,
+			'purchase_date' => $this->input->post('purchase_date'),
+			'notes' => $this->input->post('notes'),
+			'status' => 'Pending'
+		];
+		$product = $this->input->post('products') ?? null;
+		$input = $this->M_Transaction->inputPurchase($data, $product);
+		redirect('transaction/purchase_list');
+	}
+
+	public function detail_purchase($id){
+		$purchase = $this->M_Transaction->getPurchase(['purchase.id_purchase' => $id])->result();
+		$purchase_products = $this->M_Transaction->purchaseProduct($id)->result();
+		$clients = $this->M_Client->getClient([])->result();
+		$products = $this->M_Product->getProduct([])->result();
+		$products = array_map(function($val){
+			$val->units = $this->M_Product->getProductUnits($val->id_product)->result();
+			$val->product_units = $val->units;
+			$val->units = json_encode($val->units);
+			// $val->units = str_replace('"', '\'', $val->units);
+			return $val;
+		},$products);
+		// var_dump($products);
+		$data = [
+			'content' => 'detail_purchase',
+			'result'  => [
+				'title' => 'Detail Permintaan',
+                'menu_active' => 'transaction',
+                'submenu_active' => 'list-purchase',
+				'purchase' => $purchase,
+				'purchase_products' => $purchase_products,
+				'clients' 	 => $clients,
+				'products' 	 => $products
+			],
+		];
+
+		$this->load->view('template/main',$data);
+	}
+
+	public function detail($id){
+		$transaction = $this->M_Transaction->getTransaction(['transactions.id_transaction' => $id])->result();
+		$products = $this->M_Transaction->transactionProduct($id)->result();
+		$data = [
+			'content' => 'detail_transaction',
+			'result'  => [
+				'title' => 'Detail Transaksi',
+                'menu_active' => 'transaction',
+                'submenu_active' => 'list-transaction',
+				'transaction' 	 => $transaction,
+				'products' 	 => $products
+			],
+		];
+
+		$this->load->view('template/main',$data);
+	}
+
+	public function update_purchase($id){
+		$data = [
+			'purchase_code' => $this->input->post('purchase_code'),
+			'id_client' => $this->input->post('id_client') ?? null,
+			'purchase_date' => $this->input->post('purchase_date'),
+			'notes' => $this->input->post('notes'),
+			'status' => 'Pending'
+		];
+		$product = $this->input->post('products') ?? null;
+		$where = [
+			'id_purchase' => $id
+		];
+		$input = $this->M_Transaction->updatePurhcase($data, $product,$where);
+		redirect('transaction/detail_purchase/'.$id);
+
+	}
+
+	public function check(){
+		$data = [
+			'start_date' => $this->input->post('start_date'),
+			'end_date' => $this->input->post('end_date'),
+			'id_client' => $this->input->post('id_client')
+		];
+
+		$need = $this->M_Transaction->checkNeed($data)->result();
+		$stocks = $this->M_Transaction->checkStock()->result();
+		$need = array_map(function($val) use($stocks){
+			foreach($stocks ?? [] as $stock){
+				if($val->id_product_unit == $stock->id_product_unit){
+					$val->qty = $val->qty - $stock->stock;
+				}
+			}
+			return $val;
+		},$need);
+		
+		echo json_encode($need);
+
 	}
 
 }

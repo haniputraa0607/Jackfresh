@@ -204,9 +204,27 @@ class Product extends CI_Controller {
 			'id_product' => $id,
 			'id_unit'  	 => $this->input->post('id_unit'),
 			'stock'  	 => $this->input->post('stock'),
-			'price'  	 => $this->input->post('id_unit'),
+			'price'  	 => $this->input->post('price'),
 		];
 		$input = $this->M_Product->input($data,'product_units');
 		redirect('product/detail_product/'.$id);
+	}
+
+	public function delete_product_unit($id_product, $id_product_unit){
+		$where = array ('id_product_unit' => $id_product_unit);
+        $this->M_Product->delete($where, 'product_units');
+        redirect('product/detail_product/'.$id_product);
+	}
+
+	public function update_product_unit($id_product, $id_product_unit){
+		$data = [
+			'stock'  	 => $this->input->post('stock'),
+			'price'  	 => $this->input->post('price'),
+		];
+		$where = [
+			'id_product_unit' => $id_product_unit,
+		];
+		$update = $this->M_Product->update_product_unit($data,$where);
+		redirect('product/detail_product/'.$id_product);
 	}
 }

@@ -60,6 +60,11 @@ class M_Product extends CI_Model{
 		$this->db->join('units', 'units.id_unit = product_units.id_unit');
         return $this->db->get();
 	}
+
+	public function update_product_unit($data,$where){
+		$this->db->where($where);
+        $this->db->update('product_units',$data);
+	}
 }
 
 ?>

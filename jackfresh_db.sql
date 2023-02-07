@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 12, 2022 at 07:48 AM
+-- Generation Time: Feb 07, 2023 at 03:11 PM
 -- Server version: 8.0.21
 -- PHP Version: 7.3.24-(to be removed in future macOS)
 
@@ -43,7 +43,8 @@ CREATE TABLE `clients` (
 --
 
 INSERT INTO `clients` (`id_client`, `client_code`, `client_name`, `client_type`, `client_address`, `client_phone`, `client_email`, `notes`) VALUES
-(4, 'RST-1', 'Resto 12', 'Restaurant', 'Solo asdasd', '081923123', 'resto@gmail.com', 'asd       ');
+(4, 'RST-1', 'Resto 12', 'Restaurant', 'Solo asdasd', '081923123', 'resto@gmail.com', 'asd       '),
+(5, 'KDI', 'Kedai 21', '', 'e', '09123123123', 'kedai@gmail.com', 'e');
 
 -- --------------------------------------------------------
 
@@ -79,7 +80,6 @@ CREATE TABLE `product_units` (
   `id_product_unit` int NOT NULL,
   `id_product` int NOT NULL,
   `id_unit` int NOT NULL,
-  `qty` int NOT NULL,
   `price` int NOT NULL,
   `stock` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -88,9 +88,10 @@ CREATE TABLE `product_units` (
 -- Dumping data for table `product_units`
 --
 
-INSERT INTO `product_units` (`id_product_unit`, `id_product`, `id_unit`, `qty`, `price`, `stock`) VALUES
-(4, 2, 2, 5, 30000, 4),
-(7, 2, 5, 0, 5, 6);
+INSERT INTO `product_units` (`id_product_unit`, `id_product`, `id_unit`, `price`, `stock`) VALUES
+(4, 2, 2, 40000, 2),
+(11, 4, 2, 20000, 2),
+(12, 2, 5, 20000, 8);
 
 -- --------------------------------------------------------
 
@@ -120,6 +121,14 @@ CREATE TABLE `purchase` (
   `notes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `purchase`
+--
+
+INSERT INTO `purchase` (`id_purchase`, `id_client`, `purchase_code`, `purchase_date`, `status`, `notes`) VALUES
+(8, 4, 'TES-2', '2023-01-28 21:07:57', 'Pending', 'te'),
+(17, 5, 'TES 2', '2023-01-30 00:00:00', 'Process', 'tes');
+
 -- --------------------------------------------------------
 
 --
@@ -133,6 +142,18 @@ CREATE TABLE `purchase_product_units` (
   `qty` int NOT NULL,
   `status` tinyint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `purchase_product_units`
+--
+
+INSERT INTO `purchase_product_units` (`id_purchase_product_unit`, `id_purchase`, `id_product_unit`, `qty`, `status`) VALUES
+(53, 8, 4, 6, 0),
+(54, 8, 11, 8, 0),
+(55, 8, 12, 20, 0),
+(56, 17, 4, 9, 0),
+(57, 17, 11, 2, 1),
+(58, 17, 12, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -151,6 +172,16 @@ CREATE TABLE `transactions` (
   `notes` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `transactions`
+--
+
+INSERT INTO `transactions` (`id_transaction`, `id_client`, `id_purchase`, `transaction_code`, `transaction_date`, `grand_total`, `status`, `notes`) VALUES
+(32, 4, NULL, 'TES-1', '2022-12-10 00:00:00', 120000, 'Finished', 'tes'),
+(35, 4, NULL, 'TES-4', '2022-12-24 00:00:00', 120000, 'Finished', 'tes'),
+(36, 4, NULL, 'TES-5', '2022-12-31 00:00:00', 100000, 'Finished', 'ffe'),
+(37, 4, NULL, 'new januari', '2023-01-24 00:00:00', 120000, 'Finished', 'tes');
+
 -- --------------------------------------------------------
 
 --
@@ -165,6 +196,20 @@ CREATE TABLE `transaction_product_units` (
   `price` int NOT NULL,
   `status` tinyint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `transaction_product_units`
+--
+
+INSERT INTO `transaction_product_units` (`id_transaction_product_unit`, `id_transaction`, `id_product_unit`, `qty`, `price`, `status`) VALUES
+(10, 32, 11, 2, 40000, 1),
+(11, 32, 4, 2, 80000, 1),
+(14, 35, 4, 2, 80000, 1),
+(15, 35, 11, 2, 40000, 1),
+(16, 36, 11, 1, 20000, 1),
+(17, 36, 4, 2, 80000, 1),
+(18, 37, 4, 2, 80000, 1),
+(19, 37, 11, 2, 40000, 1);
 
 -- --------------------------------------------------------
 
@@ -290,7 +335,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id_client` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_client` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -302,7 +347,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `product_units`
 --
 ALTER TABLE `product_units`
-  MODIFY `id_product_unit` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_product_unit` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `product_unit_conversions`
@@ -314,25 +359,25 @@ ALTER TABLE `product_unit_conversions`
 -- AUTO_INCREMENT for table `purchase`
 --
 ALTER TABLE `purchase`
-  MODIFY `id_purchase` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_purchase` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `purchase_product_units`
 --
 ALTER TABLE `purchase_product_units`
-  MODIFY `id_purchase_product_unit` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_purchase_product_unit` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id_transaction` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_transaction` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `transaction_product_units`
 --
 ALTER TABLE `transaction_product_units`
-  MODIFY `id_transaction_product_unit` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_transaction_product_unit` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `units`
