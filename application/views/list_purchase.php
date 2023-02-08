@@ -2,7 +2,7 @@
 <h1 class="h3 mb-2 text-gray-800"><?php echo $title; ?></h1>
 <div class="row">
 	<div class="col-md-10">
-		<p class="mb-4">List of unit can use by product</p>
+		<p class="mb-4">Daftar Permintaan Setiap Klien</p>
 	</div>
 	<div class="col-md-2">
 		<button type="button" class="btn btn-secondary ml-4" data-toggle="modal" data-target="#modalCheckRequirement">Cek Kebutuhan</button>

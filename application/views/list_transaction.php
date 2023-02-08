@@ -1,6 +1,6 @@
 <!-- Page Heading -->
 <h1 class="h3 mb-2 text-gray-800"><?php echo $title; ?></h1>
-<p class="mb-4">List of unit can use by product</p>
+<p class="mb-4">Daftar Transaksi Setiap Klien</p>
 <div class="card shadow mb-4">
     <div class="card-body">
         <div class="table-responsive">

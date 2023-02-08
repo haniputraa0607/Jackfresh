@@ -233,6 +233,44 @@ class M_Transaction extends CI_Model{
         return $this->db->get();
 	}
 
+    public function getID_purchase(){
+        $this->db->select('MAX(RIGHT(id_purchase,5)) as id_purchase ', FALSE);
+          $this->db->order_by('id_purchase','DESC');    
+          $this->db->limit(1);    
+          $query = $this->db->get('purchase');  //cek dulu apakah ada sudah ada kode di tabel.    
+          if($query->num_rows() <> 0){      
+               //cek kode jika telah tersedia    
+               $data = $query->row();      
+               $kode = intval($data->id_purchase) + 1; 
+          }
+          else{      
+               $kode = 1;  //cek jika kode belum terdapat pada table
+          }
+              $tgl=date('dm'); 
+              $batas = str_pad($kode, 4, "0", STR_PAD_LEFT);    
+              $kodetampil = "PR-".$tgl."-".$batas;  //format kode
+              return $kodetampil;  
+    }
+
+      public function getID_transaction(){
+        $this->db->select('MAX(RIGHT(id_transaction,5)) as id_transaction ', FALSE);
+          $this->db->order_by('id_transaction','DESC');    
+          $this->db->limit(1);    
+          $query = $this->db->get('transactions');  //cek dulu apakah ada sudah ada kode di tabel.    
+          if($query->num_rows() <> 0){      
+               //cek kode jika telah tersedia    
+               $data = $query->row();      
+               $kode = intval($data->id_transaction) + 1; 
+          }
+          else{      
+               $kode = 1;  //cek jika kode belum terdapat pada table
+          }
+              $tgl=date('dm'); 
+              $batas = str_pad($kode, 4, "0", STR_PAD_LEFT);    
+              $kodetampil = "TR-".$tgl."-".$batas;  //format kode
+              return $kodetampil;  
+    }
+
 }
 
 ?>

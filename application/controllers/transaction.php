@@ -20,7 +20,7 @@ class Transaction extends CI_Controller {
 		$data = [
 			'content' => 'list_transaction',
 			'result'  => [
-				'title' => 'List Transaction',
+				'title' => 'Daftar Transaksi',
                 'menu_active' => 'transaction',
                 'submenu_active' => 'list-transaction',
 				'transactions' 	 => $transactions
@@ -30,6 +30,7 @@ class Transaction extends CI_Controller {
     }
 
     public function create_transaction(){
+    	$id_transaction = $this->M_Transaction->getID_transaction();
 		$clients = $this->M_Client->getClient([])->result();
 		$products = $this->M_Product->getProduct([])->result();
 		$products = array_map(function($val){
@@ -44,7 +45,7 @@ class Transaction extends CI_Controller {
 				'title' => 'Buat Transaksi Baru',
                 'menu_active' => 'transaction',
                 'submenu_active' => 'create-transaction',
-
+                'id_transaction' => $id_transaction,
 				'clients' 	 => $clients,
 				'products' 	 => $products
 			],
@@ -58,7 +59,7 @@ class Transaction extends CI_Controller {
 		$data = [
 			'content' => 'list_purchase',
 			'result'  => [
-				'title' 		 => 'List Purchase Request',
+				'title' 		 => 'Daftar Permintaan Pembelian',
                 'menu_active' 	 => 'transaction',
                 'submenu_active' => 'list-purchase',
 				'purchases' 	 => $purchases,
@@ -69,6 +70,7 @@ class Transaction extends CI_Controller {
     }
 
     public function create_purchase(){
+    	$id_purchase = $this->M_Transaction->getID_purchase();
 		$clients = $this->M_Client->getClient([])->result();
 		$products = $this->M_Product->getProduct([])->result();
 		$products = array_map(function($val){
@@ -83,6 +85,7 @@ class Transaction extends CI_Controller {
 				'title' => 'Buat Permintaan Baru',
                 'menu_active' => 'transaction',
                 'submenu_active' => 'create-purchase',
+                'id_purchase' => $id_purchase,
 				'clients' 	 => $clients,
 				'products' 	 => $products
 			],
