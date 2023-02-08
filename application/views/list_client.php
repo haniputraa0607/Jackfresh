@@ -29,7 +29,8 @@
                         <td class="text-center"><?php echo $key+1 ?></td>
                         <td><?php echo $client->client_name ?></td>
                         <td><?php echo $client->client_code ?></td>
-                        <td><?= $client->client_type == 'Hotel' ? 'Hotel' : $client->client_type == 'Restaurant' ? 'Restoran' : 'Personal' ?></td>
+                        <td><?php echo $client->client_type ?> </td> 
+                        <!-- == 'Hotel' ? 'Hotel' : $client->client_type == 'Restaurant' ? 'Restoran' : $client->client_type == 'Personal' ? 'Personal' ?> </td> -->
                         <td class="text-center">
                             <a href="<?php echo base_url().'client/detail_client/'.$client->id_client; ?>" class="btn btn-primary btn-icon-split"><span class="text">Detail</span></a>
                             <a href="<?php echo base_url().'client/delete/'.$client->id_client; ?>" class="btn btn-danger btn-icon-split"><span class="text">Delete</span></a>

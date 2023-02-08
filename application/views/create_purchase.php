@@ -7,7 +7,7 @@
             <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-2 col-form-label">Kode Permintaan</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" name="purchase_code" required>
+                    <input type="text" class="form-control" name="purchase_code" value="<?php echo $id_purchase; ?>" required readonly>
                 </div>
             </div>
             <div class="form-group row">
