@@ -48,7 +48,8 @@ class M_Transaction extends CI_Model{
 					"id_transaction" => $id_input,
 					"id_product_unit" => $check["id_product_unit"],
 					"qty" => $prod["qty"],
-					"price" => $check["price"],
+					"pricecash" => $check["pricecash"],
+					"pricetempo" => $check["pricetempo"],
 					"status" => 1
 				];
 				$grand_total += $prod_transction["price"];
@@ -69,7 +70,8 @@ class M_Transaction extends CI_Model{
 			return [
 				"status" => true,
 				"id_product_unit" => $prod_unit->id_product_unit,
-				"price" => $data["qty"]*$prod_unit->price,
+				"pricecash" => $data["qty"]*$prod_unit->pricecash,
+				"pricetempo" => $data["qty"]*$prod_unit->pricetempo,
 				"stock_after" => $prod_unit->stock - $data["qty"]
 			];
 		}

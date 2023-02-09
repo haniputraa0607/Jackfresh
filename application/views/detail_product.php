@@ -65,7 +65,8 @@
 							<tr>
 								<th>Unit</th>
 								<th>Stock</th>
-								<th>Harga</th>
+								<th>Harga Cash</th>
+								<th>Harga Tempo</th>
 								<th>Detail</th>
 							</tr>
 						</thead>
@@ -74,7 +75,9 @@
 								<tr>
 									<td><?php echo $unit->unit_name ?></td>
 									<td><?php echo $unit->stock ?></td>
-									<td><?php echo $unit->price ?></td>
+									<td><?php echo $unit->pricecash ?></td>
+									<td><?php echo $unit->pricetempo ?></td>
+
 									<td class="text-center">
 										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal<?php echo $unit->id_product_unit; ?>">Detail</button>
 										<a href="<?php echo base_url().'product/delete_product_unit/'.$products->id_product.'/'.$unit->id_product_unit; ?>" class="btn btn-danger btn-icon-split"><span class="text">Hapus</span></a>
@@ -107,12 +110,19 @@
 													</div>
 													<div class="form-group row">
 														<div class="col-sm-3"></div>
-														<label for="inputEmail3" class="col-sm-2 col-form-label">Harga</label>
+														<label for="inputEmail3" class="col-sm-2 col-form-label">Harga Cash</label>
 														<div class="col-sm-4">
-															<input type="number" class="form-control" name="price" required value="<?php echo $unit->price ?>">
+															<input type="number" class="form-control" name="pricecash" required value="<?php echo $unit->pricecash ?>">
 														</div>
 													</div>
-																			</div>
+													<div class="form-group row">
+														<div class="col-sm-3"></div>
+														<label for="inputEmail3" class="col-sm-2 col-form-label">Harga Tempo</label>
+														<div class="col-sm-4">
+															<input type="number" class="form-control" name="pricetempo" required value="<?php echo $unit->pricetempo ?>">
+														</div>
+													</div>
+											</div>
 												<div class="modal-footer">
 													<button type="submit" class="btn btn-primary">Update</button>
 												</div>
@@ -131,6 +141,8 @@
 		</div>
 	</div>
 </div>
+
+
 
 <!-- Modal -->
 <div class="modal fade" id="modalAddNewUnitProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -167,9 +179,16 @@
 					</div>
 					<div class="form-group row">
 						<div class="col-sm-3"></div>
-						<label for="inputEmail3" class="col-sm-2 col-form-label">Harga</label>
+						<label for="inputEmail3" class="col-sm-2 col-form-label">Harga Cash</label>
 						<div class="col-sm-4">
-							<input type="number" class="form-control" name="price" required>
+							<input type="number" class="form-control" name="pricecash" required>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-sm-3"></div>
+						<label for="inputEmail3" class="col-sm-2 col-form-label">Harga Tempo</label>
+						<div class="col-sm-4">
+							<input type="number" class="form-control" name="pricetempo" required>
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -213,9 +232,16 @@
 							</div>
 							<div class="form-group row">
 								<div class="col-sm-3"></div>
-								<label for="inputEmail3" class="col-sm-2 col-form-label">Harga</label>
+								<label for="inputEmail3" class="col-sm-2 col-form-label">Harga Cash</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" name="price"  value="<?= $value_product_units->price ?>" required>
+									<input type="text" class="form-control" name="pricecash"  value="<?= $value_product_units->pricecash ?>" required>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-3"></div>
+								<label for="inputEmail3" class="col-sm-2 col-form-label">Harga Tempo</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" name="pricetempo"  value="<?= $value_product_units->pricetempo ?>" required>
 								</div>
 							</div>
 						</div>
