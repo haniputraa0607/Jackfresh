@@ -30,6 +30,16 @@
                     <input type="date" class="form-control" name="purchase_date" value="<?= date('Y-m-d', strtotime($purchase->purchase_date)) ?>" required>
                 </div>
             </div>
+			<div class="form-group row">
+				<label for="inputEmail3" class="col-sm-2 col-form-label">Tipe Pembayaran</label>
+				<div class="col-sm-4">
+					<select class="form-control" name="payment_type" >
+						<option value="" selected disabled></option>
+						<option value="Cash" <?= $purchase->payment_type == 'Cash' ? 'selected' : '' ?>>Cash</option>
+						<option value="Tempo" <?= $purchase->payment_type == 'Tempo' ? 'selected' : '' ?>>Tempo</option>
+					</select>
+				</div>
+			</div>
             <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-2 col-form-label">Catatan</label>
                 <div class="col-sm-4">

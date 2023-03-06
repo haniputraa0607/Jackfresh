@@ -31,6 +31,12 @@
 						</div>
 					</div>
 					<div class="form-group row">
+						<label for="inputEmail3" class="col-sm-5 col-form-label">Tipe Pembayaran</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" value="<?= $transaction->payment_type ?>" disabled>
+						</div>
+					</div>
+					<div class="form-group row">
 						<label for="inputEmail3" class="col-sm-5 col-form-label">Catatan</label>
 						<div class="col-sm-6">
 							<textarea name="notes" class="form-control" disabled><?= $transaction->notes ?></textarea>
@@ -68,6 +74,10 @@
 									<td><?php echo $product->price ?></td>
 								</tr>
 							<?php } ?>
+							<tr>
+								<td colspan="3">Total</td>
+								<td><?php echo $transaction->grand_total ?></td>
+							</tr>
 						</tbody>
 					</table>
 				</div>
