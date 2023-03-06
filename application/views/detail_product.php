@@ -60,7 +60,7 @@
 			</div>
 			<div class="card-body">
 				<div class="table">
-					<table class="table table-bordered" cellspacing="0">
+					<table class="table table-bordered table_unit" cellspacing="0">
 						<thead class="text-center">
 							<tr>
 								<th>Unit</th>
@@ -95,29 +95,29 @@
 											<div class="modal-body">
 												<form role="form" action="<?php echo base_url().'product/update_product_unit/'.$products->id_product.'/'.$unit->id_product_unit; ?>" method="post" enctype="multipart/form-data">
 													<div class="form-group row">
-														<div class="col-sm-3"></div>
-														<label for="inputEmail3" class="col-sm-2 col-form-label">Unit</label>
+														<div class="col-sm-2"></div>
+														<label for="inputEmail3" class="col-sm-3 col-form-label">Unit</label>
 														<div class="col-sm-4">
 															<input type="text" class="form-control" readonly value="<?php echo $unit->unit_name ?>">
 														</div>
 													</div>
 													<div class="form-group row">
-														<div class="col-sm-3"></div>
-														<label for="inputEmail3" class="col-sm-2 col-form-label">Stock</label>
+														<div class="col-sm-2"></div>
+														<label for="inputEmail3" class="col-sm-3 col-form-label">Stock</label>
 														<div class="col-sm-4">
 															<input type="number" class="form-control" name="stock" required value="<?php echo $unit->stock ?>">
 														</div>
 													</div>
 													<div class="form-group row">
-														<div class="col-sm-3"></div>
-														<label for="inputEmail3" class="col-sm-2 col-form-label">Harga Cash</label>
+														<div class="col-sm-2"></div>
+														<label for="inputEmail3" class="col-sm-3 col-form-label">Harga Cash</label>
 														<div class="col-sm-4">
 															<input type="number" class="form-control" name="pricecash" required value="<?php echo $unit->pricecash ?>">
 														</div>
 													</div>
 													<div class="form-group row">
-														<div class="col-sm-3"></div>
-														<label for="inputEmail3" class="col-sm-2 col-form-label">Harga Tempo</label>
+														<div class="col-sm-2"></div>
+														<label for="inputEmail3" class="col-sm-3 col-form-label">Harga Tempo</label>
 														<div class="col-sm-4">
 															<input type="number" class="form-control" name="pricetempo" required value="<?php echo $unit->pricetempo ?>">
 														</div>
@@ -157,36 +157,35 @@
 			<div class="modal-body">
 				<form role="form" action="<?php echo base_url().'product/input_product_unit/'.$products->id_product; ?>" method="post" enctype="multipart/form-data">
 					<div class="form-group row">
-						<div class="col-sm-3"></div>
-						<label for="inputEmail3" class="col-sm-2 col-form-label">Unit</label>
+						<div class="col-sm-2"></div>
+						<label for="inputEmail3" class="col-sm-3 col-form-label">Unit</label>
 						<div class="col-sm-4">
 							<select class="form-control" name="id_unit" required>
 								<option value="" selected disabled></option>
 								<?php foreach($all_units ?? [] as $all_unit){ ?>
 									<?php if(!in_array($all_unit->id_unit,$product_units)) { ?>	
 										<option value="<?= $all_unit->id_unit ?>" ><?= $all_unit->unit_name ?></option>
-									<?php } } ?>
-								</select>
-							</div>
+								<?php } } ?>
+							</select>
 						</div>
 					</div>
 					<div class="form-group row">
-						<div class="col-sm-3"></div>
-						<label for="inputEmail3" class="col-sm-2 col-form-label">Stock</label>
+						<div class="col-sm-2"></div>
+						<label for="inputEmail3" class="col-sm-3 col-form-label">Stock</label>
 						<div class="col-sm-4">
 							<input type="number" class="form-control" name="stock" required>
 						</div>
 					</div>
 					<div class="form-group row">
-						<div class="col-sm-3"></div>
-						<label for="inputEmail3" class="col-sm-2 col-form-label">Harga Cash</label>
+						<div class="col-sm-2"></div>
+						<label for="inputEmail3" class="col-sm-3 col-form-label">Harga Cash</label>
 						<div class="col-sm-4">
 							<input type="number" class="form-control" name="pricecash" required>
 						</div>
 					</div>
 					<div class="form-group row">
-						<div class="col-sm-3"></div>
-						<label for="inputEmail3" class="col-sm-2 col-form-label">Harga Tempo</label>
+						<div class="col-sm-2"></div>
+						<label for="inputEmail3" class="col-sm-3 col-form-label">Harga Tempo</label>
 						<div class="col-sm-4">
 							<input type="number" class="form-control" name="pricetempo" required>
 						</div>
@@ -211,35 +210,34 @@
 				<div class="modal-body">
 					<form role="form" action="<?php echo base_url().'product/edit_product_unit/'.$products->id_product; ?>" method="post" enctype="multipart/form-data">
 						<div class="form-group row">
-							<div class="col-sm-3"></div>
-							<label for="inputEmail3" class="col-sm-2 col-form-label">Unit</label>
+							<div class="col-sm-2"></div>
+							<label for="inputEmail3" class="col-sm-3 col-form-label">Unit</label>
 							<div class="col-sm-4">
 								<select class="form-control" name="id_unit" required>
 									<option value="" selected disabled></option>
 									<?php foreach($all_units ?? [] as $all_unit){ ?>
 										
 											<option value="<?= $all_unit->id_unit ?>" ><?= $all_unit->unit_name ?></option>
-										<?php } ?>
-									</select>
-								</div>
+									<?php } ?>
+								</select>
 							</div>
 							<div class="form-group row">
-								<div class="col-sm-3"></div>
-								<label for="inputEmail3" class="col-sm-2 col-form-label">Stock</label>
+								<div class="col-sm-2"></div>
+								<label for="inputEmail3" class="col-sm-3 col-form-label">Stock</label>
 								<div class="col-sm-4">
 									<input type="text" class="form-control" name="stock" value="<?= $value_product_units->stock ?>" required>
 								</div>
 							</div>
 							<div class="form-group row">
-								<div class="col-sm-3"></div>
-								<label for="inputEmail3" class="col-sm-2 col-form-label">Harga Cash</label>
+								<div class="col-sm-2"></div>
+								<label for="inputEmail3" class="col-sm-3 col-form-label">Harga Cash</label>
 								<div class="col-sm-4">
 									<input type="text" class="form-control" name="pricecash"  value="<?= $value_product_units->pricecash ?>" required>
 								</div>
 							</div>
 							<div class="form-group row">
-								<div class="col-sm-3"></div>
-								<label for="inputEmail3" class="col-sm-2 col-form-label">Harga Tempo</label>
+								<div class="col-sm-2"></div>
+								<label for="inputEmail3" class="col-sm-3 col-form-label">Harga Tempo</label>
 								<div class="col-sm-4">
 									<input type="text" class="form-control" name="pricetempo"  value="<?= $value_product_units->pricetempo ?>" required>
 								</div>
@@ -255,3 +253,10 @@
 	</div>
 </div>
 
+<style> 
+ .table_unit{
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+</style>

@@ -27,13 +27,13 @@
                     <input type="date" class="form-control" name="transaction_date" required>
                 </div>
             </div>
-           <div class="form-group row">
+            <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-2 col-form-label">Tipe Pembayaran</label>
                 <div class="col-sm-4">
-					<select class="form-control" name="transaction_type" >
+					<select class="form-control" name="payment_type" >
 						<option value="" selected disabled></option>
-						<option value="cash">Cash</option>
-						<option value="tempo">Tempo</option>
+						<option value="Cash">Cash</option>
+						<option value="Tempo">Tempo</option>
 					</select>
                 </div>
             </div>

@@ -44,15 +44,19 @@ class M_Transaction extends CI_Model{
 					$this->db->trans_rollback();
 					return false;
 				}
+				if($data['payment_type'] == 'Cash'){
+					$price_product = $check['pricecash'];
+				}else{
+					$price_product = $check['pricetempo'];
+				}
 				$prod_transction = [
 					"id_transaction" => $id_input,
 					"id_product_unit" => $check["id_product_unit"],
 					"qty" => $prod["qty"],
-					"pricecash" => $check["pricecash"],
-					"pricetempo" => $check["pricetempo"],
+					"price" => $price_product,
 					"status" => 1
 				];
-				$grand_total += $prod_transction["price"];
+				$grand_total += $prod_transction['price'];
 				$input_prod = $this->db->insert('transaction_product_units',$prod_transction);
 				$update_stock = $this->db->where(["id_product"=> $prod["id_product"], "id_unit"=> $prod["id_unit"]])->update('product_units',["stock"=>$check['stock_after']]);
 			}
@@ -110,6 +114,7 @@ class M_Transaction extends CI_Model{
 					'transaction_code' => $data["purchase_code"],
 					'id_client' => $data["id_client"] ?? null,
 					'transaction_date' => $data["purchase_date"],
+					'payment_type' => $data["payment_type"],
 					'notes' => $data["notes"],
 				];
 				$input_trans = $this->inputTransaction($data_trans, $product);
@@ -194,6 +199,7 @@ class M_Transaction extends CI_Model{
 					'transaction_code' => $data["purchase_code"],
 					'id_client' => $data["id_client"] ?? null,
 					'transaction_date' => $data["purchase_date"],
+					'payment_type' => $data["payment_type"],
 					'notes' => $data["notes"],
 				];
 				$input_trans = $this->inputTransaction($data_trans, $product);

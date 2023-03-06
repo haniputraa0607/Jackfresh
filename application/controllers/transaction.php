@@ -111,7 +111,7 @@ class Transaction extends CI_Controller {
 			'transaction_code' => $this->input->post('transaction_code'),
 			'id_client' => $this->input->post('id_client') ?? null,
 			'transaction_date' => $this->input->post('transaction_date'),
-			'transaction_type' => $this->input->post('transaction_type'),
+			'payment_type' => $this->input->post('payment_type'),
 			'notes' => $this->input->post('notes'),
 		];
 		$product = $this->input->post('products') ?? null;
@@ -124,6 +124,7 @@ class Transaction extends CI_Controller {
 			'purchase_code' => $this->input->post('purchase_code'),
 			'id_client' => $this->input->post('id_client') ?? null,
 			'purchase_date' => $this->input->post('purchase_date'),
+			'payment_type' => $this->input->post('payment_type'),
 			'notes' => $this->input->post('notes'),
 			'status' => 'Pending'
 		];
@@ -183,6 +184,7 @@ class Transaction extends CI_Controller {
 			'purchase_code' => $this->input->post('purchase_code'),
 			'id_client' => $this->input->post('id_client') ?? null,
 			'purchase_date' => $this->input->post('purchase_date'),
+			'payment_type' => $this->input->post('payment_type'),
 			'notes' => $this->input->post('notes'),
 			'status' => 'Pending'
 		];
