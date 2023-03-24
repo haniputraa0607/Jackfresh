@@ -131,9 +131,9 @@
 				<table class="table table-bordered table-hover">
 					<thead>
 						<tr>
-							<th>Product Name</th>
+							<th>Nama Produk</th>
 							<th class="text-center">Unit</th>
-							<th class="text-center">Stock</th>
+							<th class="text-center">Kebutuhan</th>
 						</tr>
 					</thead>
 					<tbody>

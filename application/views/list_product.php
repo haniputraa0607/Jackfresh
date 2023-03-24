@@ -10,7 +10,7 @@
                         <th>No</th>
                         <th>Nama Produk</th>
                         <th>Kode Produk</th>
-                        <th>Visibilitas</th>
+                        <th>Harga</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -19,7 +19,7 @@
                         <th>No</th>
                         <th>Nama Produk</th>
                         <th>Kode Produk</th>
-                        <th>Visibilitas</th>
+                        <th>Harga</th>
                         <th>Aksi</th>
                     </tr>
                 </tfoot>

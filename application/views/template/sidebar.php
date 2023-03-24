@@ -9,7 +9,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url();?>main/index">
                 <div class="sidebar-brand-icon">
-                    <i ></i>
+                   <i></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">Jack Fresh</div>
             </a>

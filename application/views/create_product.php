@@ -22,7 +22,7 @@
                     <textarea name="notes" class="form-control"></textarea>
                 </div>
             </div>
-            <div class="form-group row">
+            <!-- <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-2 col-form-label">Gambar</label>
                 <div class="col-sm-3">
                     <div class="input-group">
@@ -32,7 +32,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="form-group row">
                 <div class="col-sm-2"></div>
                 <div class="col-sm-10">

@@ -25,7 +25,7 @@
             <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-2 col-form-label">Email Pelanggan</label>
                 <div class="col-sm-3">
-                    <input type="email" class="form-control" name="client_email" required>
+                    <input type="email" class="form-control" name="client_email" >
                 </div>
             </div>
             <div class="form-group row">
