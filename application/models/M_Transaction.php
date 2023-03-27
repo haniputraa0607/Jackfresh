@@ -279,6 +279,47 @@ class M_Transaction extends CI_Model{
               return $kodetampil;  
     }
 
+	public function getDayIncome($filter){
+		$this->db->select_sum('grand_total');
+		
+
+		if(isset($filter['start']) && isset($filter['end'])){
+			$this->db->where('transaction_date >=', $filter['start']);
+			$this->db->where('transaction_date <', $filter['end']);
+		}
+
+		if(isset($filter['month'])){
+			$this->db->where('MONTH(transaction_date)', $filter['month']);
+		}
+
+		if(isset($filter['year'])){
+			$this->db->where('YEAR(transaction_date)', $filter['year']);
+		}
+		return $query = $this->db->get('transactions')->result();
+	}
+
+	public function totalTransaction(){
+		$query = $this->db->query('SELECT * FROM transactions');
+		return $query->num_rows();
+	}
+
+	public function clientTransaction($filter){
+		$this->db->select('clients.*, SUM(transactions.grand_total) as total_transaction');
+		$this->db->from('clients');
+		$this->db->group_by('clients.id_client');
+		if(isset($filter['month'])){
+			$this->db->where('MONTH(transaction_date)', $filter['month']);
+		}
+
+		if(isset($filter['year'])){
+			$this->db->where('YEAR(transaction_date)', $filter['year']);
+		}
+		$this->db->join('transactions', 'transactions.id_client = clients.id_client');
+        return $this->db->get()->result();
+	}
+
+
+
 }
 
 ?>
