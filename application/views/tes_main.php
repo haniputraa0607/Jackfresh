@@ -15,7 +15,7 @@
 								<div class="h5 mb-0 font-weight-bold text-gray-800"><?= 'Rp '.number_format((int)$data['today_income'],0,",",".") ?></div>
 							</div>
 							<div class="col-auto">
-								<i class="fas fa-calendar fa-2x text-gray-300"></i>
+								<i id="date-range-picker-btn" class="fas fa-calendar fa-2x text-gray-300"></i>
 							</div>
 						</div>
 					</div>
@@ -76,6 +76,7 @@
 				</div>
 			</div>
 		</div>
+		
 
 		<div class="row">
 			
@@ -176,7 +177,22 @@
 
 <script src="<?php echo base_url() ?>assets/vendor/chart.js/Chart.min.js"></script>
 
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js" defer></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
 <script type="text/javascript">
+
+	$(function() {
+		$('#date-range-picker-btn').daterangepicker({
+			opens: 'right'
+		}, function(start, end, label) {
+			console.log("A date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+		});
+	});
+
+	
 	// Set new default font family and font color to mimic Bootstrap's default styling
 	(Chart.defaults.global.defaultFontFamily = "Nunito"),
 		'-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
@@ -206,6 +222,8 @@
 		}
 		return s.join(dec);
 	}
+
+	
 
 	// Area Chart Example
 	var xav = [<?php echo '"'.implode('","', $data['income_permonth']).'"' ?>];
@@ -317,4 +335,6 @@
 			},
 		},
 	});
+
+
 </script>
