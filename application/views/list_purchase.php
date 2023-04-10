@@ -111,38 +111,38 @@
 			"id_client" : $("#id_client option:selected").val()
 		}
 		$.ajax({
-        type: 'POST',
-        url: "<?php echo base_url().'transaction/check'; ?>",
-        data: data,
-		dataType: 'json',
-        success: function(response) {
-			$('#modalCheckRequirement .output').empty();
-			var tr = '';
-			response.forEach(function(data, index){
-				tr += `
-					<tr>
-						<td>${data.product_name}</td>
-						<td class="text-center">${data.unit_name}</td>
-						<td class="text-center">${data.qty}</td>
-					</tr>
-				`
-			})
-			var html = `
-				<table class="table table-bordered table-hover">
-					<thead>
+			type: 'POST',
+			url: "<?php echo base_url().'transaction/check'; ?>",
+			data: data,
+			dataType: 'json',
+			success: function(response) {
+				$('#modalCheckRequirement .output').empty();
+				var tr = '';
+				response.forEach(function(data, index){
+					tr += `
 						<tr>
-							<th>Nama Produk</th>
-							<th class="text-center">Unit</th>
-							<th class="text-center">Kebutuhan</th>
+							<td>${data.product_name}</td>
+							<td class="text-center">${data.unit_name}</td>
+							<td class="text-center">${data.qty}</td>
 						</tr>
-					</thead>
-					<tbody>
-						${tr}
-					</tbody>
-				</table>
-			`;
-			$('#modalCheckRequirement .output').append(html);
-        }
-    });
+					`
+				})
+				var html = `
+					<table class="table table-bordered table-hover">
+						<thead>
+							<tr>
+								<th>Nama Produk</th>
+								<th class="text-center">Unit</th>
+								<th class="text-center">Kebutuhan</th>
+							</tr>
+						</thead>
+						<tbody>
+							${tr}
+						</tbody>
+					</table>
+				`;
+				$('#modalCheckRequirement .output').append(html);
+			}
+		});
 	}
 </script>
