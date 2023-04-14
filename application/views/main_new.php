@@ -12,7 +12,7 @@
 							<div class="col mr-2">
 								<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
 									Pendapatan (Per-Hari)</div>
-								<div class="h5 mb-0 font-weight-bold text-gray-800"><?= 'Rp '.number_format((int)$data['today_income'],0,",",".") ?></div>
+								<div class="h5 mb-0 font-weight-bold text-gray-800" id="trx_today"><?= 'Rp '.number_format((int)$data['today_income'],0,",",".") ?></div>
 							</div>
 							<div class="col-auto">
 								<i id="date-range-picker-btn" class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -115,36 +115,6 @@
 						<h6 class="m-0 font-weight-bold text-primary">Pelanggan</h6>
 					</div>
 					<div class="card-body">
-						<!-- <h4 class="small font-weight-bold">Resto A <span
-								class="float-right">Total Transaksi (Dalam Rupiah)</span></h4>
-						<div class="progress mb-4">
-							<div class="progress-bar bg-danger" role="progressbar" style="width: 20%"
-								aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-						</div>
-						<h4 class="small font-weight-bold">Resto B <span
-								class="float-right">40%</span></h4>
-						<div class="progress mb-4">
-							<div class="progress-bar bg-warning" role="progressbar" style="width: 40%"
-								aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-						</div>
-						<h4 class="small font-weight-bold">Customer Database <span
-								class="float-right">60%</span></h4>
-						<div class="progress mb-4">
-							<div class="progress-bar" role="progressbar" style="width: 60%"
-								aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-						</div>
-						<h4 class="small font-weight-bold">Payout Details <span
-								class="float-right">80%</span></h4>
-						<div class="progress mb-4">
-							<div class="progress-bar bg-info" role="progressbar" style="width: 80%"
-								aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-						</div>
-						<h4 class="small font-weight-bold">Account Setup <span
-								class="float-right">Complete!</span></h4>
-						<div class="progress">
-							<div class="progress-bar bg-success" role="progressbar" style="width: 100%"
-								aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-						</div> -->
 						<?php foreach ($data['client_transaction'] ?? [] as $key => $client) : ?>
 							<?php 
 								$color = '';
@@ -192,7 +162,20 @@
 		$('#date-range-picker-btn').daterangepicker({
 			opens: 'right'
 		}, function(start, end, label) {
-			console.log("A date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+			// console.log("A date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+			var data = {
+				"start_date" : start.format('YYYY-MM-DD'),
+				"end_date" : end.format('YYYY-MM-DD'),
+			}
+			$.ajax({
+				type: 'POST',
+				url: "<?php echo base_url().'main/change_date_trx'; ?>",
+				data: data,
+				dataType: 'json',
+				success: function(response) {
+					$('#trx_today').html(response);
+				}
+			});
 		});
 	});
 
