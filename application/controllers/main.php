@@ -42,7 +42,7 @@ class Main extends CI_Controller {
 		}
 		
 		$data = [
-			'content' => 'tes_main',
+			'content' => 'main_new',
 			'result'  => [
 				'title' => 'Laporan Jackfresh',
                 'menu_active' => 'dashboard',
@@ -58,5 +58,17 @@ class Main extends CI_Controller {
 			],
 		];
 		$this->load->view('template/main',$data);
+	}
+
+	public function change_date_trx(){
+		$data = [
+			'start' => $this->input->post('start_date'),
+			'end' => $this->input->post('end_date'),
+		];
+
+		$result = $this->M_Transaction->getDayIncome($data)[0]->grand_total ?? 0;
+		$result = 'Rp '.number_format((int)$result,0,",",".");
+		
+		echo json_encode($result);
 	}
 }
