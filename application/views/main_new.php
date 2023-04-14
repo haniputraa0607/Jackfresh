@@ -1,9 +1,14 @@
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800"><?php echo $title; ?></h1>
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800"><?php echo $title; ?></h1>
+                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                class="fas fa-download fa-sm text-white-50"></i> Laporan Omzet</a>
+                    </div>
+
 <div class="card shadow mb-4">
     <div class="card-body">
 		<div class="row">
-
+		
 			<!-- Pendapatan Per Hari Filter Tanggal-->
 			<div class="col-xl-3 col-md-6 mb-4">
 				<div class="card border-left-primary shadow h-100 py-2">
@@ -33,7 +38,7 @@
 								<div class="h5 mb-0 font-weight-bold text-gray-800"><?= 'Rp '.number_format((int)$data['month_income'],0,",",".") ?></div>
 							</div>
 							<div class="col-auto">
-								<i id="month-picker" class="fas fa-calendar fa-2x text-gray-300"></i>
+								<i id="month-picker-btn" class="fas fa-calendar fa-2x text-gray-300"></i>
 							</div>
 						</div>
 					</div>
@@ -154,7 +159,11 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js" defer></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" defer></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"/>
+
 
 <script type="text/javascript">
 
@@ -180,23 +189,30 @@
 	});
 
 	$(function() {
-		$('#date-range-picker-btn').datepicker({
-			format: 'MM yyyy',
-			startView: 'months', 
-			minViewMode: 'months',
-			opens: 'right'
-		}, function(start, end, label) {
-			console.log("A date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+	$("#month-picker-btn").datepicker( {
+    	format: "mm-yyyy",
+    	startView: "months", 
+    	minViewMode: "months"
+		}, function(data) {
+			console.log(data);
+			
+			//console.log("A date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+			// var data = {
+			// 	"start_date" : start.format('YYYY-MM-DD'),
+			// 	"end_date" : end.format('YYYY-MM-DD'),
+			// }
+			// $.ajax({
+			// 	type: 'POST',
+			// 	url: "<?php echo base_url().'main/change_date_trx'; ?>",
+			// 	data: data,
+			// 	dataType: 'json',
+			// 	success: function(response) {
+			// 		$('#trx_today').html(response);
+			// 	}
+			// });
 		});
 	});
 
-	$(document).ready(function(){
-		$('#month-picker').datepicker({
-			format: "MM yyyy",
-			startView: "months", 
-			minViewMode: "months"
-		});
-	});
 
 
 
