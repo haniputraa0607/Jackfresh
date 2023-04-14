@@ -94,6 +94,7 @@
 						
                 </div>
 				<div class="modal-footer">
+					<button id="export" class="btn btn-success" style="display: none;">Export</button>
 					<button type="submit" class="btn btn-primary">Cek</button>
 				</div>
 			</form>
@@ -102,8 +103,9 @@
 	</div>
 </div>
 
-
+<script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript">
+
 	function submitCheck(){
 		var data = {
 			"start_date" : $(`#start_date`).val(),
@@ -142,7 +144,26 @@
 					</table>
 				`;
 				$('#modalCheckRequirement .output').append(html);
+				$('#modalCheckRequirement #export').show();
 			}
 		});
 	}
+
+	$(`#modalCheckRequirement #export`).on('click',function(){
+		var data = {
+			"start_date" : $(`#start_date`).val(),
+			"end_date" : $(`#end_date`).val(),
+			"id_client" : $("#id_client option:selected").val()
+		}
+		$.ajax({
+			type: 'POST',
+			url: "<?php echo base_url().'transaction/export_requirement'; ?>",
+			data: data,
+			dataType: 'json',
+			success: function() {
+				console.log(123)
+			}
+		});
+	});
+
 </script>

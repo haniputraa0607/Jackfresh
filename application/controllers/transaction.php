@@ -219,4 +219,45 @@ class Transaction extends CI_Controller {
 
 	}
 
+	public function export_requirement(){
+		$data = [
+			'start_date' => $this->input->post('start_date'),
+			'end_date' => $this->input->post('end_date'),
+			'id_client' => $this->input->post('id_client')
+		];
+
+		if($data['id_client'] == 'all'){
+			$cleints = $this->M_Client->getClient([])->result();
+		}else{
+			$cleints = $this->M_Client->getClient(['id_client'=>$data['id_client']])->result();
+		}
+
+		$result = [];
+		foreach($cleints ?? [] as $client){
+			
+			$data['id_client'] = $client->id_client;
+			$need = $this->M_Transaction->checkNeed($data)->result();
+			$stocks = $this->M_Transaction->checkStock()->result();
+			$need = array_map(function($val) use($stocks){
+				foreach($stocks ?? [] as $stock){
+					if($val->id_product_unit == $stock->id_product_unit){
+						$val->qty = $val->qty - $stock->stock;
+					}
+				}
+				return $val;
+			},$need??[]);
+
+			if($need){
+				$result[] = [
+					'id_client' => $client->id_client,
+					'client_name' => $client->client_name,
+					'need' => $need
+				];
+			}
+		}
+
+		echo json_encode($result);
+
+	}
+
 }
