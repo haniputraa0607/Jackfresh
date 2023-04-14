@@ -33,7 +33,7 @@
 								<div class="h5 mb-0 font-weight-bold text-gray-800"><?= 'Rp '.number_format((int)$data['month_income'],0,",",".") ?></div>
 							</div>
 							<div class="col-auto">
-								<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+								<i id="month-picker" class="fas fa-calendar fa-2x text-gray-300"></i>
 							</div>
 						</div>
 					</div>
@@ -177,6 +177,10 @@
 
 <script src="<?php echo base_url() ?>assets/vendor/chart.js/Chart.min.js"></script>
 
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
+<link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js" defer></script>
@@ -191,6 +195,27 @@
 			console.log("A date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
 		});
 	});
+
+	$(function() {
+		$('#date-range-picker-btn').datepicker({
+			format: 'MM yyyy',
+			startView: 'months', 
+			minViewMode: 'months',
+			opens: 'right'
+		}, function(start, end, label) {
+			console.log("A date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+		});
+	});
+
+	$(document).ready(function(){
+		$('#month-picker').datepicker({
+			format: "MM yyyy",
+			startView: "months", 
+			minViewMode: "months"
+		});
+	});
+
+
 
 	
 	// Set new default font family and font color to mimic Bootstrap's default styling
