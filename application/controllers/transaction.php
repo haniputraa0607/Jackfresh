@@ -260,4 +260,11 @@ class Transaction extends CI_Controller {
 
 	}
 
+	public function nota($id_transaction){
+		$transaction = $this->M_Transaction->getTransaction(['transactions.id_transaction' => $id_transaction])->result();
+		$transaction['products'] = $this->M_Transaction->transactionProduct($id_transaction)->result();
+		// var_dump($transaction);
+		redirect ('transaction');
+	}
+
 }

@@ -149,7 +149,7 @@ class M_Transaction extends CI_Model{
 	}
 
 	public function transactionProduct($id){
-		$this->db->select('transaction_product_units.*, products.product_name, units.unit_name');
+		$this->db->select('transaction_product_units.*, products.product_name, units.unit_name, product_units.pricecash, product_units.pricetempo');
 		$this->db->from('transaction_product_units');
         $this->db->where('transaction_product_units.id_transaction',$id);
 		$this->db->join('product_units', 'product_units.id_product_unit = transaction_product_units.id_product_unit');

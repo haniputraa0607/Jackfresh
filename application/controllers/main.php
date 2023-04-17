@@ -71,4 +71,16 @@ class Main extends CI_Controller {
 		
 		echo json_encode($result);
 	}
+
+	public function export_dashboard(){
+		
+		$month = date('m');
+		$year = date('Y');
+		$data = [
+			'month' => $month,
+			'year' => $year,
+			'client_trx' => $this->M_Transaction->clientTransaction(['month'=>$month,'year'=>$year]),
+			'total_transaction' => $this->M_Transaction->totalTransaction(),
+		];
+	}
 }

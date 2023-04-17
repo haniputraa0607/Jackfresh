@@ -36,7 +36,7 @@
                         <td class="text-center">
                             <a href="<?php echo base_url().'transaction/detail/'.$transaction->id_transaction; ?>" class="btn btn-primary btn-icon-split"><span class="text">Detail</span></a>
                             <a href="<?php echo base_url().'transaction/delete/'.$transaction->id_transaction; ?>" class="btn btn-danger btn-icon-split"><span class="text">Delete</span></a>
-                            <a href="<?php echo base_url().'#'.$transaction->id_transaction; ?>" class="btn btn-success btn-icon-split"><span class="text">Nota</span></a>
+                            <a href="<?php echo base_url().'transaction/nota/'.$transaction->id_transaction; ?>" class="btn btn-success btn-icon-split"><span class="text">Nota</span></a>
                         </td>
                     </tr>
                     <?php endforeach; ?>
