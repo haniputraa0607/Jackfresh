@@ -298,8 +298,15 @@ class M_Transaction extends CI_Model{
 		return $query = $this->db->get('transactions')->result();
 	}
 
-	public function totalTransaction(){
+	public function totalTransaction($filter){
 		$query = $this->db->query('SELECT * FROM transactions');
+		if(isset($filter['month'])){
+			$this->db->where('MONTH(transaction_date)', $filter['month']);
+		}
+
+		if(isset($filter['year'])){
+			$this->db->where('YEAR(transaction_date)', $filter['year']);
+		}
 		return $query->num_rows();
 	}
 
