@@ -1,7 +1,7 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800"><?php echo $title; ?></h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                        <a href="<?php echo base_url().'main/export_dashboard' ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Laporan Omzet</a>
                     </div>
 
@@ -161,8 +161,8 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js" defer></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" defer></script>
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
 
 
 <script type="text/javascript">
@@ -189,27 +189,27 @@
 	});
 
 	$(function() {
-	$("#month-picker-btn").datepicker( {
-    	format: "mm-yyyy",
-    	startView: "months", 
-    	minViewMode: "months"
-		}, function(data) {
-			console.log(data);
-			
-			//console.log("A date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-			// var data = {
-			// 	"start_date" : start.format('YYYY-MM-DD'),
-			// 	"end_date" : end.format('YYYY-MM-DD'),
-			// }
-			// $.ajax({
-			// 	type: 'POST',
-			// 	url: "<?php echo base_url().'main/change_date_trx'; ?>",
-			// 	data: data,
-			// 	dataType: 'json',
-			// 	success: function(response) {
-			// 		$('#trx_today').html(response);
-			// 	}
-			// });
+		$("#month-picker-btn").datepicker( {
+				format: "mm-yyyy",
+				startView: "months", 
+				minViewMode: "months"
+			}, function(data) {
+				console.log(data);
+				
+				//console.log("A date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+				// var data = {
+				// 	"start_date" : start.format('YYYY-MM-DD'),
+				// 	"end_date" : end.format('YYYY-MM-DD'),
+				// }
+				// $.ajax({
+				// 	type: 'POST',
+				// 	url: "<?php echo base_url().'main/change_date_trx'; ?>",
+				// 	data: data,
+				// 	dataType: 'json',
+				// 	success: function(response) {
+				// 		$('#trx_today').html(response);
+				// 	}
+				// });
 		});
 	});
 

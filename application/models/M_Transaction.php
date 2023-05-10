@@ -149,7 +149,7 @@ class M_Transaction extends CI_Model{
 	}
 
 	public function transactionProduct($id){
-		$this->db->select('transaction_product_units.*, products.product_name, units.unit_name');
+		$this->db->select('transaction_product_units.*, products.product_name, units.unit_name, product_units.pricecash, product_units.pricetempo');
 		$this->db->from('transaction_product_units');
         $this->db->where('transaction_product_units.id_transaction',$id);
 		$this->db->join('product_units', 'product_units.id_product_unit = transaction_product_units.id_product_unit');
@@ -298,8 +298,15 @@ class M_Transaction extends CI_Model{
 		return $query = $this->db->get('transactions')->result();
 	}
 
-	public function totalTransaction(){
+	public function totalTransaction($filter){
 		$query = $this->db->query('SELECT * FROM transactions');
+		if(isset($filter['month'])){
+			$this->db->where('MONTH(transaction_date)', $filter['month']);
+		}
+
+		if(isset($filter['year'])){
+			$this->db->where('YEAR(transaction_date)', $filter['year']);
+		}
 		return $query->num_rows();
 	}
 

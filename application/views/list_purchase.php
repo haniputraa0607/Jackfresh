@@ -94,6 +94,7 @@
 						
                 </div>
 				<div class="modal-footer">
+					<a href="<?php echo base_url().'transaction/export_requirement'; ?>" id="export" class="btn btn-success" style="display: none;">Export</a>
 					<button type="submit" class="btn btn-primary">Cek</button>
 				</div>
 			</form>
@@ -102,8 +103,9 @@
 	</div>
 </div>
 
-
+<script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript">
+
 	function submitCheck(){
 		var data = {
 			"start_date" : $(`#start_date`).val(),
@@ -118,6 +120,7 @@
 			success: function(response) {
 				$('#modalCheckRequirement .output').empty();
 				var tr = '';
+				var check = 0;
 				response.forEach(function(data, index){
 					tr += `
 						<tr>
@@ -125,7 +128,8 @@
 							<td class="text-center">${data.unit_name}</td>
 							<td class="text-center">${data.qty}</td>
 						</tr>
-					`
+					`;
+					check++;
 				})
 				var html = `
 					<table class="table table-bordered table-hover">
@@ -142,7 +146,36 @@
 					</table>
 				`;
 				$('#modalCheckRequirement .output').append(html);
+				if(check > 0){
+					$('#modalCheckRequirement #export').attr("href", `<?php echo base_url().'transaction/export_requirement/'; ?>`+data.start_date+`/`+data.end_date+`/`+data.id_client)
+					$('#modalCheckRequirement #export').show();
+				}else{
+					$('#modalCheckRequirement #export').hide();
+				}
 			}
 		});
 	}
+
+	// $(`#modalCheckRequirement #export`).on('click',function(){
+	// 	var data = {
+	// 		"start_date" : $(`#start_date`).val(),
+	// 		"end_date" : $(`#end_date`).val(),
+	// 		"id_client" : $("#id_client option:selected").val()
+	// 	}
+	// 	$.ajax({
+	// 		type: 'POST',
+	// 		url: "<?php echo base_url().'transaction/export_requirement'; ?>",
+	// 		data: data,
+	// 		dataType: 'json',
+	// 		success: function() {
+	// 			var $a = $("<a>");
+	// 			$a.attr("href",data.file);
+	// 			$("body").append($a);
+	// 			$a.attr("download","Kebutuhan.xls");
+	// 			$a[0].click();
+	// 			$a.remove();
+	// 		}
+	// 	});
+	// });
+
 </script>
