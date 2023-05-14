@@ -11,6 +11,7 @@
                 <div class="sidebar-brand-icon">
                    <i></i>
                 </div>
+				<img src="<?php echo base_url();?>assets/img/logo.png" alt="" style="height:40px">
                 <div class="sidebar-brand-text mx-3">Jack Fresh</div>
             </a>
 

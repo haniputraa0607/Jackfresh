@@ -10,6 +10,7 @@ class M_Transaction extends CI_Model{
         $this->db->where($where);
 		$this->db->join('transaction_product_units', 'transaction_product_units.id_transaction = transactions.id_transaction');
 		$this->db->join('clients', 'clients.id_client = transactions.id_client', 'left');
+		$this->db->order_by('transactions.id_transaction', 'desc' );
         return $this->db->get();
     }
 
@@ -21,6 +22,7 @@ class M_Transaction extends CI_Model{
         $this->db->where($where);
 		$this->db->join('purchase_product_units', 'purchase_product_units.id_purchase = purchase.id_purchase');
 		$this->db->join('clients', 'clients.id_client = purchase.id_client', 'left');
+		$this->db->order_by('purchase.id_purchase', 'desc' );
         return $this->db->get();
     }
 
