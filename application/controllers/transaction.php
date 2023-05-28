@@ -419,7 +419,7 @@ class Transaction extends CI_Controller {
 		$sheet->setTitle("NOTA PENJUALAN");
 
 		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-		header('Content-Disposition: attachment; filename="Nota Penjualan.xlsx"'); // Set nama file excel nya
+		header('Content-Disposition: attachment; filename="Nota Penjualan '.$transaction->client_name.' '.date('d F Y').'.xlsx"'); // Set nama file excel nya
 		header('Cache-Control: max-age=0');
 		$writer = new Xlsx($spreadsheet);
 		$writer->save('php://output');
@@ -590,7 +590,11 @@ class Transaction extends CI_Controller {
 		$sheet->setTitle("KEBUTUHAN");
 
 		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-		header('Content-Disposition: attachment; filename="Kebutuhan.xlsx"'); // Set nama file excel nya
+		if($data['id_client'] == 'all'){
+			header('Content-Disposition: attachment; filename="Kebutuhan Semua '.date('d F Y').'.xlsx"'); // Set nama file excel nya
+		}else{
+			header('Content-Disposition: attachment; filename="Kebutuhan '.$cleints->client_name.' '.date('d F Y').'.xlsx"'); // Set nama file excel nya
+		}
 		header('Cache-Control: max-age=0');
 		$writer = new Xlsx($spreadsheet);
 		$writer->save('php://output');
