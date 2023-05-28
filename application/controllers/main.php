@@ -80,7 +80,7 @@ class Main extends CI_Controller {
 
 	public function export_dashboard(){
 
-		$month = date('m',);
+		$month = date('m');
 		$year = date('Y');
 		$spreadsheet = new Spreadsheet();
     	$sheet = $spreadsheet->getActiveSheet();
@@ -200,10 +200,10 @@ class Main extends CI_Controller {
 
 		$sheet->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
 
-		$sheet->setTitle("Laporan Omzet JackFresh");
+		$sheet->setTitle('Laporan Omzet JackFresh');
 
 		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-		header('Content-Disposition: attachment; filename="Laporan Omzet JackFresh.xlsx"'); // Set nama file excel nya
+		header('Content-Disposition: attachment; filename="Laporan Omzet JackFresh '.date('F').' '.date('Y').'.xlsx"'); // Set nama file excel nya
 		header('Cache-Control: max-age=0');
 		$writer = new Xlsx($spreadsheet);
 		$writer->save('php://output');

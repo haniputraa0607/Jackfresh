@@ -105,7 +105,7 @@
 														<div class="col-sm-2"></div>
 														<label for="inputEmail3" class="col-sm-3 col-form-label">Stock</label>
 														<div class="col-sm-4">
-															<input type="number" class="form-control" name="stock" required value="<?php echo $unit->stock ?>">
+															<input type="number" step="0.1" class="form-control" name="stock" required value="<?php echo $unit->stock ?>">
 														</div>
 													</div>
 													<div class="form-group row">
@@ -173,7 +173,7 @@
 						<div class="col-sm-2"></div>
 						<label for="inputEmail3" class="col-sm-3 col-form-label">Stock</label>
 						<div class="col-sm-4">
-							<input type="number" class="form-control" name="stock" required>
+							<input type="number" step="0.1" class="form-control" name="stock" required>
 						</div>
 					</div>
 					<div class="form-group row">
@@ -225,7 +225,7 @@
 								<div class="col-sm-2"></div>
 								<label for="inputEmail3" class="col-sm-3 col-form-label">Stock</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" name="stock" value="<?= $value_product_units->stock ?>" required>
+									<input type="text" step="0.1" class="form-control" name="stock" value="<?= $value_product_units->stock ?>" required>
 								</div>
 							</div>
 							<div class="form-group row">

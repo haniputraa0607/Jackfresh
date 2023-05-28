@@ -76,7 +76,7 @@
 						</select>
 					</div>
 					<div class="col-sm-1">
-                    	<input type="number" class="form-control" name="products[<?= $key ?>][qty]" value="<?= $pur_pro->qty ?>" required>
+                    	<input type="number" step="0.1" class="form-control" name="products[<?= $key ?>][qty]" value="<?= $pur_pro->qty ?>" required>
 					</div>
 					<div class="col-sm-1">
 						<?php if($purchase->status != 'Finished') { ?>
@@ -118,7 +118,7 @@
 						</select>
 					</div>
 					<div class="col-sm-1">
-                    	<input type="number" class="form-control" name="products[${no_product}][qty]" required>
+                    	<input type="number" step="0.1" class="form-control" name="products[${no_product}][qty]" required>
 					</div>
 					<div class="col-sm-1">
 						<button class="btn btn-danger" onclick="deleteProduct(${no_product})">Hapus</button>
